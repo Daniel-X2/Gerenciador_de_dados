@@ -1,5 +1,7 @@
 import customtkinter
-from recursos import fonts
+import os
+from recursos.fontes import fonts
+
 
 class App(customtkinter.CTk):
     def __init__(self):
@@ -15,14 +17,16 @@ class App(customtkinter.CTk):
     def funçao_inicial(self):
         print
     def frame(self):
-        n1=customtkinter.CTkFrame(self,fg_color="#242424",width=200,height=800,corner_radius=0)
-        label_font=fonts.fontes("recursos/lyster/Lyster_PERSONAL_USE_ONLY.ttf","CRUD")
-        image=customtkinter.CTkImage(label_font,size=(100,100))
-        n2=customtkinter.CTkLabel(n1,text="",image=image)
-        
-        n2.place(x=50,y=10)
-        n1.grid()
-        
+        #criaçao do frame
+        frame_lateral=customtkinter.CTkFrame(self,fg_color="#242424",width=200,height=800,corner_radius=0)
+        frame_lateral.grid()
+        #criaçao da label com fonte personalizada
+        fonte=fonts.fontes("CRUD")#esse e uma funçao que faz o necessario pra colocar a fonte, o unico parametro e do texto
+        image=customtkinter.CTkImage(fonte,size=(100,100))
+        label_font=customtkinter.CTkLabel(frame_lateral,text="",image=image)
+        label_font.place(x=50,y=10)
+
+
 
 app=App()
 app.mainloop()
