@@ -2,7 +2,7 @@ import customtkinter
 import os
 from PIL import Image
 import webbrowser 
-class App(customtkinter.CTk):
+class Apptop(customtkinter.CTkToplevel):
     def __init__(self):
         super().__init__()
         self.geometry("600x500")
@@ -12,17 +12,13 @@ class App(customtkinter.CTk):
         self.funçoes_init()
     def funçoes_init(self):
         self.fundo()
-        self.texto()
-        self.botao_github()
         self.falçao()
+        self.botao_github()
+       
     def fundo(self):    
         #plano de fundo
         plano_de_fundo=customtkinter.CTkLabel(self,bg_color="#242424",text="",width=600,height=500)
         plano_de_fundo.place(x=0,y=0)
-    def texto(self):
-        text="""usuario: admin | senha: admin"""
-        label=customtkinter.CTkLabel(self,text=text,bg_color="#242424",text_color="white")
-        label.place(x=200,y=100)
 
         agradecimentos="""   Bem vindo ao meu projeto 
         fico muito feliz que esteja olhando esse projeto
@@ -34,7 +30,7 @@ class App(customtkinter.CTk):
         dirname=os.path.dirname(__file__)
         caminho_git=os.path.join(dirname,"imagem_top")
         caminho_absoluto=os.path.join(caminho_git,"git.png")
-        imagem=customtkinter.CTkImage(Image.open(caminho_absoluto),size=(70,70))
+        imagem=customtkinter.CTkImage(Image.open(caminho_absoluto),size=(50,50))
         botao=customtkinter.CTkButton(self,text="",image=imagem,width=0,height=0,fg_color="#242424",command=self.abrir_github)
         botao.place(x=520,y=420)
     def abrir_github(self):
@@ -45,9 +41,6 @@ class App(customtkinter.CTk):
         caminho_falcao=os.path.join(dirname,"imagem_top")
         caminho_absoluto=os.path.join(caminho_falcao,"login.png")
         imagem=customtkinter.CTkImage(Image.open(caminho_absoluto),size=(200,200))
-        label=customtkinter.CTkLabel(self,text="", image=imagem)
+        label=customtkinter.CTkLabel(self,text="", image=imagem,bg_color="#242424")
         label.place(x=200,y=0)
 
-
-app = App()
-app.mainloop()

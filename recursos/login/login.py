@@ -1,12 +1,14 @@
 import customtkinter
 from PIL import Image, ImageTk
 import os
-import webbrowser 
+import webbrowser
+from toplevel import toplevel
 class Tela_login(customtkinter.CTk):
     def __init__(self, fg_color = None, **kwargs):
         super().__init__(fg_color, **kwargs)
         self.geometry("794x529")
         self.resizable(False,False)
+
         self.title("login CRUD")
         self.funçoes_init()
         #self.verificar_senha()
@@ -14,6 +16,9 @@ class Tela_login(customtkinter.CTk):
         self.plano_de_fundo()
         self.entrada()
         self.esqueceu_senha()
+        self.botao_engre()
+        self.botao_veri()
+        self.top=None
     def entrada(self):
         #text_usu.place(x=250,y=200)
         #entrada do usuario
@@ -51,13 +56,38 @@ class Tela_login(customtkinter.CTk):
         label_aguia=customtkinter.CTkLabel(self.bg_label,text="",image=aguia_img)
         #label_aguia.place(x=250,y=-40)
     def esqueceu_senha(self):
-        botao_esqueceu=customtkinter.CTkButton(self.bg_label,text="esqueceu a senha?",width=80,corner_radius=0,command=self.abrir_github)
-        botao_esqueceu.place(x=435,y=345)
+        botao_esqueceu=customtkinter.CTkButton(self.bg_label,text="esqueceu a senha?",width=0,corner_radius=10,command=self.texto,bg_color="#c19073")
+        botao_esqueceu.place(x=435,y=355)
     def abrir_github(self):
         url="https://github.com/Daniel-X2"
         webbrowser.open(url)
+    def botao_engre(self):
 
-
+        dirname=os.path.dirname(__file__)
+        caminho=os.path.join(dirname,"imagens_login")
+        caminhos=os.path.join(caminho,"canto.png")
+        imagem=Image.open(caminhos)
+        
+        #aqui coloca a imagem 
+        image_engrenagem=customtkinter.CTkImage(imagem,size=(50,50))
+        botao=customtkinter.CTkButton(self,text="",width=50,height=50,corner_radius=0,image=image_engrenagem,border_width=0,border_spacing=0,fg_color="#323e50",command=self.abrir_janela)
+        botao.place(x=0,y=480)
+    def abrir_janela(self):
+        if self.top is None or not self.top.winfo_exists():
+            self.top=toplevel.Apptop()
+        else:
+            self.top.focus()
+    def texto(self):
+        text="""usuario: admin | senha: admin"""
+        label=customtkinter.CTkLabel(self,text=text,bg_color="#242424",text_color="white")
+        label.place(x=0,y=400)
+        #ele vai chamar a funçao pra destruir a label depois de 6 segundos
+        self.after(6000,label.destroy)
+    def botao_veri(self):
+        botao=customtkinter.CTkButton(self,text="confirmar",width=50)
+        botao.place(x=370,y=400)
+                
+        
 
 tela_login=Tela_login()
 tela_login.mainloop() 
