@@ -1,5 +1,6 @@
 import customtkinter
-import PIL
+import os
+from PIL import Image
 import webbrowser 
 class App(customtkinter.CTk):
     def __init__(self):
@@ -12,6 +13,8 @@ class App(customtkinter.CTk):
     def funçoes_init(self):
         self.fundo()
         self.texto()
+        self.botao_github()
+        self.falçao()
     def fundo(self):    
         #plano de fundo
         plano_de_fundo=customtkinter.CTkLabel(self,bg_color="#242424",text="",width=600,height=500)
@@ -21,15 +24,29 @@ class App(customtkinter.CTk):
         label=customtkinter.CTkLabel(self,text=text,bg_color="#242424",text_color="white")
         label.place(x=200,y=100)
 
-        agradecimentos="""   bem vindo ao meu projeto 
+        agradecimentos="""   Bem vindo ao meu projeto 
         fico muito feliz que esteja olhando esse projeto
         se estiver interessado nesse projeto ou em outros basta
         acessar meu github"""
         label_agra=customtkinter.CTkLabel(self,text=agradecimentos,font=("ariel",18),bg_color="#242424",text_color="white")
         label_agra.place(x=40,y=250)
-    def abrir_navegador(self):
-        
-
+    def botao_github(self):
+        dirname=os.path.dirname(__file__)
+        caminho_git=os.path.join(dirname,"imagem_top")
+        caminho_absoluto=os.path.join(caminho_git,"git.png")
+        imagem=customtkinter.CTkImage(Image.open(caminho_absoluto),size=(70,70))
+        botao=customtkinter.CTkButton(self,text="",image=imagem,width=0,height=0,fg_color="#242424",command=self.abrir_github)
+        botao.place(x=520,y=420)
+    def abrir_github(self):
+        url="https://github.com/Daniel-X2"
+        webbrowser.open(url)
+    def falçao(self):
+        dirname=os.path.dirname(__file__)
+        caminho_falcao=os.path.join(dirname,"imagem_top")
+        caminho_absoluto=os.path.join(caminho_falcao,"login.png")
+        imagem=customtkinter.CTkImage(Image.open(caminho_absoluto),size=(200,200))
+        label=customtkinter.CTkLabel(self,text="", image=imagem)
+        label.place(x=200,y=0)
 
 
 app = App()
