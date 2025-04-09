@@ -1,4 +1,5 @@
 import customtkinter
+from hashlib import sha256
 from PIL import Image, ImageTk
 import os
 from recursos.login.toplevel import toplevel
@@ -61,10 +62,16 @@ class Tela_login(customtkinter.CTk):
         botao=customtkinter.CTkButton(self,text="confirmar",width=50,corner_radius=0,command=self.verificar_senha)
         botao.place(x=370,y=400)
     def verificar_senha(self):
-        #preferi fazer uma validaçao simples do que criptografar 
-        if self.senha.get()=="admin" and self.usuario.get()=="admin":
-            self.destruiu=True
+        #preferi fazer uma validaçao simples do que criptografar
+        senha_usu=sha256(self.senha.get().encode()).digest()
+        usuario=sha256(self.usuario.get().encode()).digest()
+        usuario_banco=""
+        senha_banco=""
+        if usuario_banco==usuario and senha_usu==senha_banco:
+            self.destruiu = True
             Tela_login.destroy(self)
+        else:
+            
     def caminho(self,path,file,x,y):
         diretorio=os.path.dirname(__file__)
         caminho=os.path.join(diretorio,path)
