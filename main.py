@@ -1,7 +1,7 @@
 import customtkinter
 import os
 from recursos.fontes import fonts
-
+from recursos.login.login import  Tela_login
 
 class App(customtkinter.CTk):
     def __init__(self):
@@ -25,8 +25,13 @@ class App(customtkinter.CTk):
         image=customtkinter.CTkImage(fonte,size=(100,100))
         label_font=customtkinter.CTkLabel(frame_lateral,text="",image=image)
         label_font.place(x=50,y=10)
+#aqui inicia a tela de login
+tela_login=Tela_login()
+tela_login.mainloop()
+#se a tela de login foi destruida inicia a tela do crud
+if tela_login.destruiu==True:
+    app=App()
+    app.mainloop()
+else:
+    pass
 
-
-
-app=App()
-app.mainloop()

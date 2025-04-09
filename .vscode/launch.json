@@ -8,7 +8,7 @@
             "name": "Depurador do Python: Arquivo Atual",
             "type": "debugpy",
             "request": "launch",
-            "program": "/home/daniel/Desktop/PROJETOS/PYTHON/novo projeto/recursos/login/login.py",
+            "program": "/home/daniel/Desktop/PROJETOS/PYTHON/novo projeto/main.py",
             "console": "integratedTerminal"
         }
     ]
