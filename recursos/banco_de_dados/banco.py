@@ -36,12 +36,10 @@ class Conexao_funcionario:
         print("Usuário inserido com sucesso!")
     def listar_funcionarios(self):
         # Listar todos os usuários
-        try:
             usuarios = self.session.query(Funcionarios).all()
             for usuario in usuarios:
-                print(f"ID: {usuario.id}, Usuário: {usuario.usuario}, Senha: {usuario.senha}")
-        except:
-            print("erro na lista de usuarios")
+                return usuario.usuario,usuario.senha
+        
 class Conexao_clientes:
     def __init__(self):
         # Criar o engine e a sessão
@@ -60,7 +58,7 @@ class Conexao_clientes:
             print(f"ID: {cliente.id}, nome: {cliente.nome}, cpf: {cliente.cpf}")
 minha_senha="admin".encode()
 senha_criptografada=sha256(minha_senha).digest()
-print(senha_criptografada)
+#print(senha_criptografada)
 
 
 # Exemplo de uso

@@ -3,6 +3,7 @@ from hashlib import sha256
 from PIL import Image, ImageTk
 import os
 from recursos.login.toplevel import toplevel
+from recursos.banco_de_dados.banco import Conexao_funcionario
 class Tela_login(customtkinter.CTk):
     def __init__(self, fg_color = None, **kwargs):
         super().__init__(fg_color, **kwargs)
@@ -65,10 +66,11 @@ class Tela_login(customtkinter.CTk):
         #preferi fazer uma validaçao simples do que criptografar
         self.verificar_senha_usu=sha256(self.senha.get().encode()).digest()
         self.verificar_usuario=sha256(self.usuario.get().encode()).digest()
-        usuario_banco="admin"
-        senha_banco="admin"
+        conexao=Conexao_funcionario()
+        usuario_banco=conexao.listar_funcionarios()[0]
+        senha_banco=conexao.listar_funcionarios()[1]
         #primeira verificaçao do usuario
-        if True:#usuario_banco==self.verificar_usuario and self.verificar_senha_usu==senha_banco:
+        if usuario_banco==self.verificar_usuario and self.verificar_senha_usu==senha_banco:
             self.destruiu = True
             self.destruir()
         else:
