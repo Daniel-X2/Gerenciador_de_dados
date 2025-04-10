@@ -30,9 +30,13 @@ class App(customtkinter.CTk):
         frame_lateral=customtkinter.CTkFrame(self,fg_color="#242424",width=200,height=800,corner_radius=0)
         frame_lateral.grid()
     def descriptar_banco_clientes(self):
-        arquivo=self.caminho_arquivo("banco_de_dados","clientes.bin")
-        arquivo_saida=self.caminho_arquivo("banco_de_dados","clientes.db")
-        descriptografar_arquivo(arquivo,arquivo_saida,)
+        try:
+            arquivo=self.caminho_arquivo("banco_de_dados","clientes.bin")
+            arquivo_saida=self.caminho_arquivo("banco_de_dados","clientes.db")
+            senha_atual=tela_login.senha_atual
+            descriptografar_arquivo(arquivo,arquivo_saida,senha_atual)
+        except:
+            print("erro na descriptografia")
     def caminho_arquivo(self,path,file):
         diretorio=os.path.dirname(__file__)
         caminho=os.path.join(diretorio,path)

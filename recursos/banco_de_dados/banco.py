@@ -1,17 +1,18 @@
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import declarative_base, sessionmaker
 from hashlib import sha256
+import logging
 # Definir a base para as tabelas
 Base_funcionario = declarative_base()
 Base_clientes=declarative_base()
-# Definir a classe Usuario
+# Definir a tabela funcionarios
 class Funcionarios(Base_funcionario):
     __tablename__ = "funcionarios"
     id = Column(Integer, primary_key=True)
     usuario = Column(String(50))
     senha = Column(String(100))
 
-# Definir a classe Clientes
+# Definir a tabela clientes
 class Clientes(Base_clientes):
     __tablename__ = "clientes"
     id = Column(Integer, primary_key=True)
@@ -22,48 +23,76 @@ class Clientes(Base_clientes):
 class Conexao_funcionario:
     def __init__(self):
         # Criar o engine e a sessão
-        self.engine = create_engine("sqlite:///funcionarios.db")
-        self.Session = sessionmaker(bind=self.engine)
-        self.session = self.Session()
+        try:
+            caminho_banco="recursos/banco_de_dados/funcionarios.db"
+            self.engine = create_engine(f"sqlite:///{caminho_banco}")
+            self.Session = sessionmaker(bind=self.engine)
+            self.session = self.Session()
+        except FileNotFoundError:
+            print("erro na criaçao ")
+        except Exception as e:
+            print(f"erro ao tentar criar o banco de dados: {str(e)} ")  
 
         # Criar as tabelas no banco de dados
         Base_funcionario.metadata.create_all(self.engine)
     def novo_funcionarios(self, usuario, senha):
         # Criar um novo usuário
-        novo_funcionario = Funcionarios(usuario=usuario, senha=senha)
-        self.session.add(novo_funcionario)
-        self.session.commit()
-        print("Usuário inserido com sucesso!")
+        try:
+            novo_funcionario = Funcionarios(usuario=usuario, senha=senha)
+            self.session.add(novo_funcionario)
+            self.session.commit()
+            print("Usuário inserido com sucesso!")
+        except Exception as e:
+            print(f"erro ao adicionar funcionarios: {str(e)} ")  
+        
     def listar_funcionarios(self):
         # Listar todos os usuários
+        try:
             usuarios = self.session.query(Funcionarios).all()
             for usuario in usuarios:
                 return usuario.usuario,usuario.senha
         
+        except Exception as e:
+            print(f"erro ao tentar listar funcionarios: {str(e)} ")  
+        
 class Conexao_clientes:
     def __init__(self):
         # Criar o engine e a sessão
-        self.engine = create_engine("sqlite:///clientes.db")
-        self.Session = sessionmaker(bind=self.engine)
-        self.session = self.Session()
+        try:
+            caminho_banco="recursos/banco_de_dados/clientes.bin"
+            self.engine = create_engine(f"sqlite:///{caminho_banco}")
+            self.Session = sessionmaker(bind=self.engine)
+            self.session = self.Session()
         # Criar as tabelas no banco de dados
-        Base_clientes.metadata.create_all(self.engine)
+            Base_clientes.metadata.create_all(self.engine)
+        except Exception as e:
+            print(f"erro ao tentar criar o banco de dados: {str(e)} ")  
+        
     def novos_clientes(self,clientes,Cpf):
-        novo_cliente=Clientes(cliente=clientes,cpf=Cpf)
-        self.session.add(novo_cliente)
-        self.session.commit()
+        """
+        Adiciona um novo cliente ao banco de dados.
+    
+        Args:
+            nome: Nome do cliente
+            cpf: CPF do cliente (apenas números)
+        except: mostar o erro
+        """
+        try:
+            novo_cliente=Clientes(cliente=clientes,cpf=Cpf)
+            self.session.add(novo_cliente)
+            self.session.commit()
+        except Exception as e:
+            self.session.rollback()
+            print(f"erro ao adicionar clientes: {str(e)} ")  
     def lista_clientes(self):
-        clientes=self.session.query(Clientes).all()
-        for cliente in clientes:
-            print(f"ID: {cliente.id}, nome: {cliente.nome}, cpf: {cliente.cpf}")
-minha_senha="admin".encode()
-senha_criptografada=sha256(minha_senha).digest()
-#print(senha_criptografada)
-
-
-# Exemplo de uso
-
-
-#conexao.novo_funcionarios(senha_criptografada,senha_criptografada)
-#conexao.listar_usuarios()
-#conexao.novo_usuario("admin","admin")
+        try:
+            clientes=self.session.query(Clientes).all()
+            
+            for cliente in clientes:
+                print(f"ID: {cliente.id}, nome: {cliente.nome}, cpf: {cliente.cpf}")
+            
+        except Exception as e:
+            print(f"erro ao listar clientes: {str(e)}")
+            
+c=Conexao_clientes()
+c.lista_clientes()
