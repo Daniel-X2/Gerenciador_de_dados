@@ -63,13 +63,14 @@ class Tela_login(customtkinter.CTk):
         botao.place(x=370,y=400)
     def verificar_senha(self):
         #preferi fazer uma validaçao simples do que criptografar
-        senha_usu=sha256(self.senha.get().encode()).digest()
-        usuario=sha256(self.usuario.get().encode()).digest()
+        self.verificar_senha_usu=sha256(self.senha.get().encode()).digest()
+        self.verificar_usuario=sha256(self.usuario.get().encode()).digest()
         usuario_banco=""
         senha_banco=""
-        if usuario_banco==usuario and senha_usu==senha_banco:
+        #primeira verificaçao do usuario
+        if usuario_banco==self.verificar_usuario and self.verificar_senha_usu==senha_banco:
             self.destruiu = True
-            Tela_login.destroy(self)
+            self.destruir()
         else:
             print
     def caminho(self,path,file,x,y):
@@ -80,3 +81,7 @@ class Tela_login(customtkinter.CTk):
         #aqui coloca a imagem
         img_ctk=customtkinter.CTkImage(imagem,size=(x,y))
         return img_ctk
+    def destruir(self):
+        self.usuario_atual=self.usuario.get()
+        self.senha_atual=self.senha.get()
+        Tela_login.destroy(self)

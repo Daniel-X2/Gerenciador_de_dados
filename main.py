@@ -1,5 +1,6 @@
 import customtkinter
 import os
+from hashlib import sha256
 from recursos.fontes import fonts
 from recursos.login.login import  Tela_login
 
@@ -30,6 +31,10 @@ tela_login=Tela_login()
 tela_login.mainloop()
 #se a tela de login foi destruida inicia a tela do crud
 if tela_login.destruiu==True:
+    #segunda verificaçao do usuario
+    usuario_atual=sha256(tela_login.usuario_atual.encode()).digest()
+    senha_atual=sha256(tela_login.senha_atual.encode()).digest()
+    
     app=App()
     app.mainloop()
 else:
