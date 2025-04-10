@@ -71,7 +71,7 @@ class Tela_login(customtkinter.CTk):
             self.destruiu = True
             Tela_login.destroy(self)
         else:
-            
+            print
     def caminho(self,path,file,x,y):
         diretorio=os.path.dirname(__file__)
         caminho=os.path.join(diretorio,path)
