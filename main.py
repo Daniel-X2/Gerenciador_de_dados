@@ -2,7 +2,7 @@ import customtkinter
 import os
 from hashlib import sha256
 from recursos.login.login import  Tela_login
-from recursos.banco_de_dados.banco import Conexao
+from recursos.banco_de_dados.banco import Conexao_clientes,Conexao_funcionario
 
 class App(customtkinter.CTk):
     def __init__(self):
@@ -29,8 +29,7 @@ if tela_login.destruiu==True:
     #segunda verificaçao do usuario
     usuario_atual=sha256(tela_login.usuario_atual.encode()).digest()
     senha_atual=sha256(tela_login.senha_atual.encode()).digest()
-    conexao=Conexao()
-    conexao.novo_usuario(usuario_atual,senha_atual)
+    
     app=App()
     app.mainloop()
 else:
