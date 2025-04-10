@@ -14,7 +14,6 @@ class Apptop(customtkinter.CTkToplevel):
         self.fundo()
         self.falçao()
         self.botao_github()
-       
     def fundo(self):    
         #plano de fundo
         plano_de_fundo=customtkinter.CTkLabel(self,bg_color="#242424",text="",width=600,height=500)

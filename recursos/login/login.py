@@ -65,10 +65,10 @@ class Tela_login(customtkinter.CTk):
         #preferi fazer uma validaçao simples do que criptografar
         self.verificar_senha_usu=sha256(self.senha.get().encode()).digest()
         self.verificar_usuario=sha256(self.usuario.get().encode()).digest()
-        usuario_banco=""
-        senha_banco=""
+        usuario_banco="admin"
+        senha_banco="admin"
         #primeira verificaçao do usuario
-        if usuario_banco==self.verificar_usuario and self.verificar_senha_usu==senha_banco:
+        if True:#usuario_banco==self.verificar_usuario and self.verificar_senha_usu==senha_banco:
             self.destruiu = True
             self.destruir()
         else:
@@ -84,4 +84,5 @@ class Tela_login(customtkinter.CTk):
     def destruir(self):
         self.usuario_atual=self.usuario.get()
         self.senha_atual=self.senha.get()
+        
         Tela_login.destroy(self)

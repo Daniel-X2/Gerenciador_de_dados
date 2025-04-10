@@ -1,11 +1,11 @@
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import declarative_base, sessionmaker
-
+from hashlib import sha256
 # Definir a base para as tabelas
 Base = declarative_base()
 # Definir a classe Usuario
-class Usuario(Base):
-    __tablename__ = "usuarios"
+class Funcionarios():
+    __tablename__ = "funcionarios"
     id = Column(Integer, primary_key=True)
     usuario = Column(String(50))
     senha = Column(String(100))
@@ -21,7 +21,7 @@ class Clientes(Base):
 class Conexao:
     def __init__(self):
         # Criar o engine e a sessão
-        self.engine = create_engine("sqlite:///meubanco.db")
+        self.engine = create_engine("sqlite:///clientes.db")
         self.Session = sessionmaker(bind=self.engine)
         self.session = self.Session()
 
@@ -31,17 +31,17 @@ class Conexao:
         novo_cliente=Clientes(cliente=clientes,cpf=Cpf)
         self.session.add(novo_cliente)
         self.session.commit()
-    def novo_usuario(self, usuario, senha):
+    def novo_funcionarios(self, usuario, senha):
         # Criar um novo usuário
-        novo_usuario = Usuario(usuario=usuario, senha=senha)
-        self.session.add(novo_usuario)
+        novo_funcionario = Funcionarios(usuario=usuario, senha=senha)
+        self.session.add(novo_funcionario)
         self.session.commit()
         print("Usuário inserido com sucesso!")
 
-    def listar_usuarios(self):
+    def listar_funcionarios(self):
         # Listar todos os usuários
         try:
-            usuarios = self.session.query(Usuario).all()
+            usuarios = self.session.query(Funcionarios).all()
             for usuario in usuarios:
                 print(f"ID: {usuario.id}, Usuário: {usuario.usuario}, Senha: {usuario.senha}")
         except:
@@ -51,10 +51,14 @@ class Conexao:
         for cliente in clientes:
             print(f"ID: {cliente.id}, nome: {cliente.nome}, cpf: {cliente.cpf}")
 
+minha_senha="admin".encode()
+senha_criptografada=sha256(minha_senha).digest()
+print(senha_criptografada)
 
 
 # Exemplo de uso
 
 conexao = Conexao()
-conexao.novo_usuario()
-conexao.listar_usuarios()
+#conexao.novo_funcionarios(senha_criptografada,senha_criptografada)
+#conexao.listar_usuarios()
+#conexao.novo_usuario("admin","admin")
