@@ -61,8 +61,8 @@ class Tela_login(customtkinter.CTk):
         #ele vai chamar a funçao pra destruir a label depois de 6 segundos
         self.after(6000,label.destroy)
     def botao_veri(self):
-        botao=customtkinter.CTkButton(self,text="confirmar",width=50,corner_radius=0,command=self.verificar_senha)
-        botao.place(x=370,y=400)
+        botao=customtkinter.CTkButton(self,text="confirmar ",width=50,corner_radius=0,command=self.verificar_senha)
+        botao.place(x=353,y=400)
     def verificar_senha(self):
         #preferi fazer uma validaçao simples do que criptografar
         self.verificar_senha_usu=self.usuario.get()

@@ -132,6 +132,3 @@ class Clientes():
         except Exception as e:
             print(f"erro ao listar clientes: {str(e)}")
             
-
-
-
