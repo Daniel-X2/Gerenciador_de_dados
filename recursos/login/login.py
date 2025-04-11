@@ -30,25 +30,29 @@ class Tela_login(customtkinter.CTk):
         self.senha=customtkinter.StringVar()
     def entrada(self):
         #entrada do usuario
-        entrada_usu=customtkinter.CTkEntry(self,fg_color="gray",textvariable=self.usuario,border_color="gray",bg_color="gray",width=300,height=33,font=("arial",17))
+        entrada_usu=customtkinter.CTkEntry(self,fg_color="white",textvariable=self.usuario,bg_color="#4714b2",width=300,height=33,font=("arial",17),corner_radius=10)
         entrada_usu.place(x=250,y=230)
 
         #entrada da senha
-        entrada_senha=customtkinter.CTkEntry(self,fg_color="gray",textvariable=self.senha,border_color="gray",bg_color="gray",width=300,height=33,font=("arial",17))
+        entrada_senha=customtkinter.CTkEntry(self,fg_color="white",textvariable=self.senha,bg_color="#4714b2",width=300,height=33,font=("arial",17),corner_radius=10)
         entrada_senha.place(x=250,y=310)
     def plano_de_fundo(self):
-        #abrindo o aquivo
-        imagem=self.caminho("imagens_login","1.png",794,529)
-        #aqui coloca a imagem
-        self.bg_label=customtkinter.CTkLabel(self,image=imagem,text='')
+        
+        
+        self.bg_label=customtkinter.CTkLabel(self,text='',bg_color="#4714b2",width=794,height=529)
         self.bg_label.place(x=0,y=0)
+
+
+        imagem=self.caminho("imagens_login","falcao_main.png",200,200)
+        aguia=customtkinter.CTkLabel(self,text="",bg_color="#4714b2",image=imagem)
+        aguia.place(x=300,y=0)
     def esqueceu_senha(self):
-        botao_esqueceu=customtkinter.CTkButton(self,text="esqueceu a senha?",width=0,corner_radius=10,command=self.texto,bg_color="#c19073")
-        botao_esqueceu.place(x=435,y=355)
+        botao_esqueceu=customtkinter.CTkButton(self,text="esqueceu a senha?",width=0,corner_radius=50,command=self.texto,bg_color="#4714b2",fg_color="white",text_color="black",font=("ariel",12))
+        botao_esqueceu.place(x=420,y=355)
     def botao_config(self):
-        imagem=self.caminho("imagens_login","canto.png",50,50)
-        botao=customtkinter.CTkButton(self,text="",width=50,height=50,corner_radius=0,image=imagem,border_width=0,border_spacing=0,fg_color="#323e50",command=self.abrir_janela)
-        botao.place(x=0,y=480)
+        imagem=self.caminho("imagens_login","definicoes1.png",40,40)
+        botao=customtkinter.CTkButton(self,text="",width=10,height=10,corner_radius=50,image=imagem,border_width=0,bg_color="#4714b2",fg_color="#4714b2",command=self.abrir_janela)
+        botao.place(x=0,y=485)
     def abrir_janela(self):
         if self.top is None or not self.top.winfo_exists():
             self.top=toplevel.Apptop()
@@ -61,7 +65,7 @@ class Tela_login(customtkinter.CTk):
         #ele vai chamar a funçao pra destruir a label depois de 6 segundos
         self.after(6000,label.destroy)
     def botao_veri(self):
-        botao=customtkinter.CTkButton(self,text="confirmar ",width=50,corner_radius=0,command=self.verificar_senha)
+        botao=customtkinter.CTkButton(self,text="confirmar ",width=50,corner_radius=50,command=self.verificar_senha,bg_color="#4714b2",fg_color="white",text_color="black")
         botao.place(x=353,y=400)
     def verificar_senha(self):
         #preferi fazer uma validaçao simples do que criptografar
