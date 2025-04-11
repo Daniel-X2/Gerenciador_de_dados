@@ -69,15 +69,16 @@ class Tela_login(customtkinter.CTk):
         self.verificar_usuario=self.senha.get()
         
         funcionario=Funcionario()
+    
         usuario_banco=descriptografar_dados(funcionario.listar_funcionarios()[0],self.verificar_usuario)
         senha_banco=descriptografar_dados(funcionario.listar_funcionarios()[1],self.verificar_senha_usu)
-        print(usuario_banco,self.verificar_senha_usu)
+        
         #primeira verificaçao do usuario
         if usuario_banco==self.verificar_usuario and self.verificar_senha_usu==senha_banco:
             self.destruiu = True
             self.destruir()
         else:
-            print
+            pass
     def caminho(self,path,file,x,y):
         diretorio=os.path.dirname(__file__)
         caminho=os.path.join(diretorio,path)

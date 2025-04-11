@@ -68,15 +68,16 @@ class Funcionario():
         try:
             usuario_criptografado=criptografar_dados(usuario,chave_criptografar)
             senha_criptografado=criptografar_dados(senha,chave_criptografar)
-            try:
-                novo_funcionario = Funcionarios_base(usuario=usuario_criptografado, senha=senha_criptografado)
-                self.session.add(novo_funcionario)
-                self.session.commit()
-                print("Usuário inserido com sucesso!")
-            except Exception as e:
-                print(f"erro ao adicionar funcionarios: {str(e)} ")  
         except:
-            print
+            print("erro")
+        try:
+            novo_funcionario = Funcionarios_base(usuario=usuario_criptografado, senha=senha_criptografado)
+            self.session.add(novo_funcionario)
+            self.session.commit()
+            print("Usuário inserido com sucesso!")
+        except Exception as e:
+            print(f"erro ao adicionar funcionarios: {str(e)} ")  
+    
     def listar_funcionarios(self):
         """
         lista os funcionarios.
@@ -107,7 +108,7 @@ class Clientes():
                 clientes_criptografado=criptografar_dados(clientes,cpf,chave_criptografar)
                 cpf_criptografado=criptografar_dados(clientes,cpf,chave_criptografar)
             except:
-                print
+                print("erro")
             novo_cliente=Clientes_base(clientes_criptografado,cpf=cpf_criptografado)
             self.session.add(novo_cliente)
             self.session.commit()
@@ -133,4 +134,4 @@ class Clientes():
             
 
 
-n2=Funcionario().listar_funcionarios()
+

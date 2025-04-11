@@ -7,29 +7,29 @@ from recursos.banco_de_dados.banco import Funcionario,Clientes
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
-        self.funçoes_da_janela()
-        self.funçao_inicial()
-    def funçao_inicial(self):
+        self.funcoes_da_janela()
+        self.funcao_inicial()
+    def funcao_inicial(self):
         print
         #self.verificar
     def verificar(self):
         usuario_atual=tela_login.usuario_atual
         senha_atual=tela_login.senha_atual
-        
-        usuario_banco=Funcionario.listar_funcionarios()[0]
-        senha_banco=Funcionario.listar_funcionarios()[1]
+        funcionario=Funcionario()
+        usuario_banco=funcionario.listar_funcionarios()[0]
+        senha_banco=funcionario.listar_funcionarios()[1]
         if senha_atual==senha_banco and usuario_atual==usuario_banco:
             pass
         else:
             self.destroy()
-    def funçoes_da_janela(self):
+    def funcoes_da_janela(self):
         self.geometry(f"{self._max_height}x{self._max_width}")
         self.minsize(height=self.winfo_screenheight(),width=self.winfo_screenwidth())
         self.frame()
-    def frame(self):
+    def lateral(self):
         #criaçao do frame
-        frame_lateral=customtkinter.CTkFrame(self,fg_color="#242424",width=200,height=800,corner_radius=0)
-        frame_lateral.grid()
+        imagem_lateral=customtkinter.CTkFrame(self,fg_color="#242424",width=200,height=800,corner_radius=0)
+        imagem_lateral.grid()
     
     def caminho_arquivo(self,path,file):
         diretorio=os.path.dirname(__file__)
@@ -51,8 +51,9 @@ if tela_login.destruiu==True:
         usuario_atual=tela_login.usuario_atual
         senha_atual=tela_login.senha_atual
         #aqui tenta descriptografar o usuario do funcionario pra verificar se a senha esta correta
-        usuario_banco=descriptografar_dados(Funcionario.listar_funcionarios()[0],usuario_atual)
-        senha_banco=descriptografar_dados(Funcionario.listar_funcionarios()[1],senha_atual)
+        funcionario=Funcionario()
+        usuario_banco=descriptografar_dados(funcionario.listar_funcionarios()[0],usuario_atual)
+        senha_banco=descriptografar_dados(funcionario.listar_funcionarios()[1],senha_atual)
         #aqui ira iniciar somente caso a senha do banco de dados e a senha atual conbinar
         if senha_atual==senha_banco and usuario_atual==usuario_banco:
             app=App()
