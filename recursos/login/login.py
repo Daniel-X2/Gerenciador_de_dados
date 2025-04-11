@@ -1,9 +1,10 @@
 import customtkinter
-from hashlib import sha256
+from recursos.banco_de_dados.criptografia.cripto import criptografar_dados,descriptografar_dados
 from PIL import Image, ImageTk
 import os
 from recursos.login.toplevel import toplevel
-from recursos.banco_de_dados.banco import Conexao_funcionario
+from recursos.banco_de_dados.banco import conexao
+
 class Tela_login(customtkinter.CTk):
     def __init__(self, fg_color = None, **kwargs):
         super().__init__(fg_color, **kwargs)
@@ -64,11 +65,12 @@ class Tela_login(customtkinter.CTk):
         botao.place(x=370,y=400)
     def verificar_senha(self):
         #preferi fazer uma validaçao simples do que criptografar
-        self.verificar_senha_usu=sha256(self.senha.get().encode()).digest()
-        self.verificar_usuario=sha256(self.usuario.get().encode()).digest()
-        conexao=Conexao_funcionario()
-        usuario_banco=conexao.listar_funcionarios()[0]
-        senha_banco=conexao.listar_funcionarios()[1]
+        self.verificar_senha_usu=self.usuario.get()
+        self.verificar_usuario=self.senha.get()
+        
+        conexao=conexao()
+        usuario_banco=descriptografar_dados(conexao.listar_funcionarios()[0],self.verificar_usuario)
+        senha_banco=descriptografar_dados(conexao.listar_funcionarios()[1],self.verificar_senha_usu)
         #primeira verificaçao do usuario
         if usuario_banco==self.verificar_usuario and self.verificar_senha_usu==senha_banco:
             self.destruiu = True

@@ -1,56 +1,79 @@
-from Crypto.Cipher import AES 
-from Crypto.Util.Padding import pad,unpad
-from Crypto.Random import get_random_bytes
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad, unpad
 from Crypto.Protocol.KDF import PBKDF2
-import os
+from Crypto.Random import get_random_bytes
+import base64
 
-def  gerar_chave(senha,salt):
-    chave=PBKDF2(senha,salt,dkLen=32,count=100000)
+# Função para gerar uma chave a partir de uma senha
+def gerar_chave(senha, salt):
+    """
+    Gera uma chave criptográfica a partir de uma senha usando PBKDF2.
+    
+    Args:
+        senha (str): A senha fornecida pelo usuário.
+        salt (bytes): Um valor aleatório para tornar a chave única.
+    
+    Returns:
+        bytes: Uma chave de 32 bytes (AES-256).
+    """
+    chave = PBKDF2(senha, salt, dkLen=32, count=100000)
     return chave
 
-def criptografar_arquivo(nome_arquivo,nome_saida,senha):
-    #gerar um salt aleatorio
-    salt=get_random_bytes(16)
-    chave=gerar_chave(senha,salt)
-    #criar objeto de criptografia AES
-    cipher=AES.new(chave,AES.MODE_CBC)
-    iv=cipher.iv
-    #LER OS DADOS DO ARQUIVO
-    with open(nome_arquivo,"rb") as f:
-        dados= f.read()
-        #adiciona o padding aos dados
-    dados_preenchidos=pad(dados,AES.block_size)
-    #criptografa os dados
-    dados_criptogrados=cipher.encrypt(dados_preenchidos)
-    #salva o salt, iv e os dados criptografados no arquivo de saida
+# Função para criptografar dados
+def criptografar_dados(dados, senha):
+    """
+    Criptografa uma string usando AES e uma senha.
+    
+    Args:
+        dados (str): Os dados a serem criptografados.
+        senha (str): A senha para derivar a chave.
+    
+    Returns:
+        str: Os dados criptografados em base64.
+    """
+    # Gerar um salt aleatório
+    salt = get_random_bytes(16)
+    chave = gerar_chave(senha, salt)
+    # Criar o objeto de criptografia AES
+    cipher = AES.new(chave, AES.MODE_CBC)
+    iv = cipher.iv  # Vetor de inicialização (IV)
+    # Adicionar padding aos dados
+    dados_preenchidos = pad(dados.encode(), AES.block_size)
+    # Criptografar os dados
+    dados_criptografados = cipher.encrypt(dados_preenchidos)
+    # Retornar os dados criptografados em base64 (salt + IV + dados criptografados)
+    return base64.b64encode(salt + iv + dados_criptografados).decode()
+# Função para descriptografar dados
+def descriptografar_dados(dados_criptografados, senha):
+    """
+    Descriptografa uma string criptografada usando AES e uma senha.
+    
+    Args:
+        dados_criptografados (str): Os dados criptografados em base64.
+        senha (str): A senha para derivar a chave.
+    
+    Returns:
+        str: Os dados descriptografados.
+    """
+    # Decodificar os dados criptografados de base64
+    conteudo = base64.b64decode(dados_criptografados)
 
-    with open(nome_saida,"wb") as f:
-        f.write(salt+iv+dados_criptogrados)
+    # Extrair o salt, IV e os dados criptografados
+    salt = conteudo[:16]
+    iv = conteudo[16:32]
+    dados_criptografados = conteudo[32:]
 
+    # Gerar a chave a partir da senha e do salt
+    chave = gerar_chave(senha, salt)
 
-def descriptografar_arquivo(nome_arquivo_criptografado,nome_arquivo_saida,senha):
+    # Criar o objeto de descriptografia AES
+    cipher = AES.new(chave, AES.MODE_CBC, iv)
 
-    with open(nome_arquivo_criptografado,"rb") as f:
-        conteudo=f.read()
-    #extrai o salt, iv e os dados criptografados
-    salt=conteudo[:16]
-    iv=conteudo[16:32]
-    dados_criptografados=conteudo[32:]
-    #gerar a chave a partir da senha e do salt
-    chave=gerar_chave(senha,salt)
-    #cria o objeto de descriptografar aes
-    cipher=AES.new(chave,AES.MODE_CBC,iv)
+    # Descriptografar os dados
+    dados_preenchidos = cipher.decrypt(dados_criptografados)
 
-    #descriptografar os dados
-    dados_preenchidos=cipher.decrypt(dados_criptografados)
+    # Remover o padding dos dados
+    return unpad(dados_preenchidos, AES.block_size).decode()
 
-    #remover o padding dos dados
-
-    dados=unpad(dados_preenchidos,AES.block_size)
-
-    with open(nome_arquivo_saida,"wb") as f:
-        f.write(dados)
-
-
-
+# Exemplo de uso
 
