@@ -55,25 +55,28 @@ def descriptografar_dados(dados_criptografados, senha):
     Returns:
         str: Os dados descriptografados.
     """
-    # Decodificar os dados criptografados de base64
-    conteudo = base64.b64decode(dados_criptografados)
+        # Decodificar os dados criptografados de base64
+    try:
+        conteudo = base64.b64decode(dados_criptografados)
 
-    # Extrair o salt, IV e os dados criptografados
-    salt = conteudo[:16]
-    iv = conteudo[16:32]
-    dados_criptografados = conteudo[32:]
+        # Extrair o salt, IV e os dados criptografados
+        salt = conteudo[:16]
+        iv = conteudo[16:32]
+        dados_criptografados = conteudo[32:]
 
-    # Gerar a chave a partir da senha e do salt
-    chave = gerar_chave(senha, salt)
+        # Gerar a chave a partir da senha e do salt
+        chave = gerar_chave(senha, salt)
 
-    # Criar o objeto de descriptografia AES
-    cipher = AES.new(chave, AES.MODE_CBC, iv)
+        # Criar o objeto de descriptografia AES
+        cipher = AES.new(chave, AES.MODE_CBC, iv)
 
-    # Descriptografar os dados
-    dados_preenchidos = cipher.decrypt(dados_criptografados)
+        # Descriptografar os dados
+        dados_preenchidos = cipher.decrypt(dados_criptografados)
 
-    # Remover o padding dos dados
-    return unpad(dados_preenchidos, AES.block_size).decode()
+        # Remover o padding dos dados
+        return unpad(dados_preenchidos, AES.block_size).decode()
+    except:
+        print("senha errada")
 
 # Exemplo de uso
 

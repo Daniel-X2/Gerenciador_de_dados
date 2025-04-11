@@ -1,17 +1,28 @@
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import declarative_base, sessionmaker
-from criptografia.cripto import criptografar_dados,descriptografar_dados
+from recursos.banco_de_dados.criptografia.cripto import criptografar_dados,descriptografar_dados
+
+
+
+
+#esta faltando incluir a libs logging pra ter um tratamento de erro melhor
+#fazer as docstrings daas funçoes 
+#fazer a validaçao do cpf 
+
+
 
 Base=declarative_base()
 # Definir a tabela funcionarios
-class Funcionarios(Base):
+class Funcionarios_base(Base):
+    """serve pra fazer as tabelas no arquivo sql"""
     __tablename__ = "funcionarios"
     id = Column(Integer, primary_key=True)
     usuario = Column(String(50))
     senha = Column(String(100))
 
 # Definir a tabela clientes
-class Clientes(Base):
+class Clientes_base(Base):
+    """serve pra fazer as tabelas no arquivo sql"""
     __tablename__ = "clientes"
     id = Column(Integer, primary_key=True)
     nome = Column(String(50))
@@ -21,7 +32,13 @@ class Conexao():
     def __init__(self):
         pass
     def sessao(self,caminho):
-        # Criar o engine e a sessão
+        """
+        usa o banco de dados ou cria se nao tiver um banco de dados
+    
+        Args:
+            caminho: caminho do diretorio
+        except: mostar o erro
+        """
         try:
             caminho_banco=caminho
             self.engine = create_engine(f"sqlite:///{caminho_banco}")
@@ -40,12 +57,19 @@ class Funcionario():
         self.session=Conexao().sessao(caminho="recursos/banco_de_dados/banco.db")
 
     def novo_funcionarios(self, usuario, senha,chave_criptografar):
-        # Criar um novo usuário
+        """
+        Adiciona um novo cliente ao banco de dados.
+    
+        Args:
+            usuario: nome de usuario
+            senha: senha do usuario
+        except: mostar o erro
+        """
         try:
             usuario_criptografado=criptografar_dados(usuario,chave_criptografar)
             senha_criptografado=criptografar_dados(senha,chave_criptografar)
             try:
-                novo_funcionario = Funcionarios(usuario=usuario_criptografado, senha=senha_criptografado)
+                novo_funcionario = Funcionarios_base(usuario=usuario_criptografado, senha=senha_criptografado)
                 self.session.add(novo_funcionario)
                 self.session.commit()
                 print("Usuário inserido com sucesso!")
@@ -54,9 +78,15 @@ class Funcionario():
         except:
             print
     def listar_funcionarios(self):
-        # Listar todos os usuários
+        """
+        lista os funcionarios.
+
+        porem lista o primeiro usuario 
+
+        except: mostar o erro
+        """
         try:
-            usuarios = self.session.query(Funcionarios).all()
+            usuarios = self.session.query(Funcionarios_base).all()
             for usuario in usuarios:
                 return usuario.usuario,usuario.senha
         
@@ -78,15 +108,22 @@ class Clientes():
                 cpf_criptografado=criptografar_dados(clientes,cpf,chave_criptografar)
             except:
                 print
-            novo_cliente=Clientes(cliente=clientes_criptografado,cpf=cpf_criptografado)
+            novo_cliente=Clientes_base(clientes_criptografado,cpf=cpf_criptografado)
             self.session.add(novo_cliente)
             self.session.commit()
         except Exception as e:
             self.session.rollback()
             print(f"erro ao adicionar clientes: {str(e)} ")  
     def lista_clientes(self,senha):
+        """
+        lista todos os clientes.
+    
+        Args:
+            senha: senha necessaria pra descriptografar
+        except: mostar o erro
+        """
         try:
-            clientes=self.session.query(Clientes).all()
+            clientes=self.session.query(Clientes_base).all()
             
             for cliente in clientes:
                 print(f"ID: {cliente.id}, nome: {cliente.nome}, cpf: {cliente.cpf}")
@@ -97,4 +134,3 @@ class Clientes():
 
 
 n2=Funcionario().listar_funcionarios()
-print(descriptografar_dados(n2[1],"admin"))

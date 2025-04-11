@@ -2,7 +2,7 @@ import customtkinter
 import os
 from recursos.banco_de_dados.criptografia.cripto import descriptografar_dados,criptografar_dados
 from recursos.login.login import  Tela_login
-from recursos.banco_de_dados.banco import conexao
+from recursos.banco_de_dados.banco import Funcionario,Clientes
 
 class App(customtkinter.CTk):
     def __init__(self):
@@ -13,11 +13,11 @@ class App(customtkinter.CTk):
         print
         #self.verificar
     def verificar(self):
-        #usuario_atual=sha256(tela_login.usuario_atual.encode()).digest()
-        #senha_atual=sha256(tela_login.senha_atual.encode()).digest()
-        #conexao=Conexao_funcionario()
-        #usuario_banco=conexao.listar_funcionarios()[0]
-        senha_banco=conexao.listar_funcionarios()[1]
+        usuario_atual=tela_login.usuario_atual
+        senha_atual=tela_login.senha_atual
+        
+        usuario_banco=Funcionario.listar_funcionarios()[0]
+        senha_banco=Funcionario.listar_funcionarios()[1]
         if senha_atual==senha_banco and usuario_atual==usuario_banco:
             pass
         else:
@@ -47,11 +47,13 @@ tela_login.mainloop()
 if tela_login.destruiu==True:
     #segunda verificaçao do usuario
     try:
+        #pega a senha e o usuario atual e verifica se sao os mesmos 
         usuario_atual=tela_login.usuario_atual
         senha_atual=tela_login.senha_atual
-        Conexao=conexao()
-        usuario_banco=descriptografar_dados(conexao.listar_funcionarios()[0],usuario_atual)
-        senha_banco=descriptografar_dados(conexao.listar_funcionarios()[1],senha_atual)
+        #aqui tenta descriptografar o usuario do funcionario pra verificar se a senha esta correta
+        usuario_banco=descriptografar_dados(Funcionario.listar_funcionarios()[0],usuario_atual)
+        senha_banco=descriptografar_dados(Funcionario.listar_funcionarios()[1],senha_atual)
+        #aqui ira iniciar somente caso a senha do banco de dados e a senha atual conbinar
         if senha_atual==senha_banco and usuario_atual==usuario_banco:
             app=App()
             app.mainloop()

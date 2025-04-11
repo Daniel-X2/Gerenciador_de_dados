@@ -3,7 +3,7 @@ from recursos.banco_de_dados.criptografia.cripto import criptografar_dados,descr
 from PIL import Image, ImageTk
 import os
 from recursos.login.toplevel import toplevel
-from recursos.banco_de_dados.banco import conexao
+from recursos.banco_de_dados.banco import Funcionario,Clientes
 
 class Tela_login(customtkinter.CTk):
     def __init__(self, fg_color = None, **kwargs):
@@ -68,9 +68,10 @@ class Tela_login(customtkinter.CTk):
         self.verificar_senha_usu=self.usuario.get()
         self.verificar_usuario=self.senha.get()
         
-        conexao=conexao()
-        usuario_banco=descriptografar_dados(conexao.listar_funcionarios()[0],self.verificar_usuario)
-        senha_banco=descriptografar_dados(conexao.listar_funcionarios()[1],self.verificar_senha_usu)
+        funcionario=Funcionario()
+        usuario_banco=descriptografar_dados(funcionario.listar_funcionarios()[0],self.verificar_usuario)
+        senha_banco=descriptografar_dados(funcionario.listar_funcionarios()[1],self.verificar_senha_usu)
+        print(usuario_banco,self.verificar_senha_usu)
         #primeira verificaçao do usuario
         if usuario_banco==self.verificar_usuario and self.verificar_senha_usu==senha_banco:
             self.destruiu = True
