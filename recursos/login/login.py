@@ -1,3 +1,4 @@
+
 import customtkinter
 from recursos.banco_de_dados.criptografia.cripto import criptografar_dados,descriptografar_dados
 from PIL import Image, ImageTk
@@ -30,28 +31,68 @@ class Tela_login(customtkinter.CTk):
         self.senha=customtkinter.StringVar()
     def entrada(self):
         #entrada do usuario
-        entrada_usu=customtkinter.CTkEntry(self,fg_color="white",textvariable=self.usuario,bg_color="#4714b2",width=300,height=33,font=("arial",17),corner_radius=10)
+        texto_usu=customtkinter.CTkLabel(self,text="USUARIO",fg_color="#4714b2")
+        texto_usu.place(x=250,y=200)
+        entrada_usu=customtkinter.CTkEntry(self,fg_color="white",
+                                            textvariable=self.usuario,
+                                            bg_color="#4714b2",
+                                            width=300,
+                                            height=33,
+                                            font=("arial",17),
+                                            corner_radius=10,text_color="black")
         entrada_usu.place(x=250,y=230)
-
+        texto_senha=customtkinter.CTkLabel(self,text="SENHA",fg_color="#4714b2")
+        texto_senha.place(x=250,y=280)
         #entrada da senha
-        entrada_senha=customtkinter.CTkEntry(self,fg_color="white",textvariable=self.senha,bg_color="#4714b2",width=300,height=33,font=("arial",17),corner_radius=10)
+        entrada_senha=customtkinter.CTkEntry(self,fg_color="white",
+                                                textvariable=self.senha,
+                                                bg_color="#4714b2",
+                                                width=300,
+                                                height=33,
+                                                font=("arial",17),
+                                                corner_radius=10,
+                                                text_color="black",
+                                                )
         entrada_senha.place(x=250,y=310)
     def plano_de_fundo(self):
         
         
-        self.bg_label=customtkinter.CTkLabel(self,text='',bg_color="#4714b2",width=794,height=529)
+        self.bg_label=customtkinter.CTkLabel(self,text='',
+                                             bg_color="#4714b2",
+                                             width=794,
+                                             height=529)
         self.bg_label.place(x=0,y=0)
 
 
         imagem=self.caminho("imagens_login","falcao_main.png",200,200)
-        aguia=customtkinter.CTkLabel(self,text="",bg_color="#4714b2",image=imagem)
+        aguia=customtkinter.CTkLabel(self,text="",
+                                     bg_color="#4714b2",
+                                     image=imagem)
         aguia.place(x=300,y=0)
     def esqueceu_senha(self):
-        botao_esqueceu=customtkinter.CTkButton(self,text="esqueceu a senha?",width=0,corner_radius=50,command=self.texto,bg_color="#4714b2",fg_color="white",text_color="black",font=("ariel",12))
+        botao_esqueceu=customtkinter.CTkButton(self,
+                                                text="esqueceu a senha?",
+                                                width=0,
+                                                corner_radius=50,
+                                                command=self.texto,
+                                                bg_color="#4714b2",
+                                                fg_color="white",
+                                                text_color="black",
+                                                font=("ariel",13),
+                                                hover_color="#4c6ef6")
         botao_esqueceu.place(x=420,y=355)
     def botao_config(self):
         imagem=self.caminho("imagens_login","definicoes1.png",40,40)
-        botao=customtkinter.CTkButton(self,text="",width=10,height=10,corner_radius=50,image=imagem,border_width=0,bg_color="#4714b2",fg_color="#4714b2",command=self.abrir_janela)
+        botao=customtkinter.CTkButton(self,text="",
+                                      width=10,
+                                      height=10,
+                                      corner_radius=50,
+                                      image=imagem,
+                                      border_width=0,
+                                      bg_color="#4714b2",
+                                      fg_color="#4714b2",
+                                      hover_color="#4c6ef6",
+                                      command=self.abrir_janela)
         botao.place(x=0,y=485)
     def abrir_janela(self):
         if self.top is None or not self.top.winfo_exists():
@@ -60,12 +101,22 @@ class Tela_login(customtkinter.CTk):
             self.top.focus()
     def texto(self):
         text="""usuario: admin | senha: admin"""
-        label=customtkinter.CTkLabel(self,text=text,bg_color="#242424",text_color="white")
+        label=customtkinter.CTkLabel(self,
+                                     text=text,
+                                     bg_color="#242424",
+                                     text_color="white")
         label.place(x=0,y=400)
         #ele vai chamar a funçao pra destruir a label depois de 6 segundos
         self.after(6000,label.destroy)
     def botao_veri(self):
-        botao=customtkinter.CTkButton(self,text="confirmar ",width=50,corner_radius=50,command=self.verificar_senha,bg_color="#4714b2",fg_color="white",text_color="black")
+        botao=customtkinter.CTkButton(self,text="confirmar ",
+                                        width=50,
+                                        corner_radius=50,
+                                        command=self.verificar_senha,
+                                        bg_color="#4714b2",
+                                        fg_color="white",
+                                        text_color="black",
+                                        hover_color="#4c6ef6")
         botao.place(x=353,y=400)
     def verificar_senha(self):
         #preferi fazer uma validaçao simples do que criptografar
