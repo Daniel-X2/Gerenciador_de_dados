@@ -9,13 +9,13 @@ from recursos.frame.main_frame import DashBoard,Users#exportar o resto aqui
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
-        
         self.funcoes_da_janela()
         self.funcao_inicial()
         self.img_falcao()
         self.label()
-        self.botoes_laterais()
         self.frames()
+        self.botoes_laterais()
+        
         self.frame_atual=""
     def frames(self):
         self.frame_Dash=DashBoard(master=self,width=1200,height=900)
@@ -24,18 +24,30 @@ class App(customtkinter.CTk):
         if self.frame_Dash.place_info():
             pass
         elif self.frame_atual!=self.frame_Dash and self.frame_atual!="":
-            self.frame_atual.destroy()
+            self.frame_atual.place_forget()
+            if self.frame_atual==self.frame_Dash:
+                pass
+            else:
+                
+                self.frame_Dash.place(x=200,y=0)
+                self.frame_atual=self.frame_Dash
         else:
             if self.frame_atual==self.frame_Dash:
                 pass
             else:
+                
                 self.frame_Dash.place(x=200,y=0)
                 self.frame_atual=self.frame_Dash
     def Users(self):
         if self.frame_Users.place_info():
             pass
         elif self.frame_atual!=self.frame_Users and self.frame_atual!="":
-            self.frame_atual
+            self.frame_atual.place_forget()
+            if self.frame_atual==self.frame_Users:
+                pass
+            else:
+                self.frame_Users.place(x=200,y=0)
+                self.frame_atual=self.frame_Users
         else:
             if self.frame_atual==self.frame_Users:
                 pass
