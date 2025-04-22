@@ -1,10 +1,11 @@
+
 import customtkinter
 import os
 from PIL import Image
 from recursos.banco_de_dados.criptografia.cripto import descriptografar_dados,criptografar_dados
 from recursos.login.login import  Tela_login
 from recursos.banco_de_dados.banco import Funcionario,Clientes
-
+from recursos.frame.main_frame import DashBoard,Users#exportar o resto aqui
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
@@ -14,32 +15,57 @@ class App(customtkinter.CTk):
         self.img_falcao()
         self.label()
         self.botoes_laterais()
-        
-        
+        self.frames()
+        self.frame_atual=""
+    def frames(self):
+        self.frame_Dash=DashBoard(master=self,width=1200,height=900)
+        self.frame_Users=Users(master=self,width=1200,height=900)
+    def dashboard(self):
+        if self.frame_Dash.place_info():
+            pass
+        elif self.frame_atual!=self.frame_Dash and self.frame_atual!="":
+            self.frame_atual.destroy()
+        else:
+            if self.frame_atual==self.frame_Dash:
+                pass
+            else:
+                self.frame_Dash.place(x=200,y=0)
+                self.frame_atual=self.frame_Dash
+    def Users(self):
+        if self.frame_Users.place_info():
+            pass
+        elif self.frame_atual!=self.frame_Users and self.frame_atual!="":
+            self.frame_atual
+        else:
+            if self.frame_atual==self.frame_Users:
+                pass
+            else:
+                self.frame_Users.place(x=200,y=0)
+                self.frame_atual=self.frame_Users
     def botoes_laterais(self):
         #botao dashboard
-        img_dashboard=customtkinter.CTkImage(Image.open("camadas.png"),size=(25,25))
+        img_dashboard=customtkinter.CTkImage(Image.open("recursos/imagens_main/camadas.png"),size=(25,25))
         botao_dashboard=customtkinter.CTkButton(self,text="  DashBoard        ",
                                         fg_color="#101a55",
                                         bg_color="#101a55",
                                         hover_color="#101a95",
                                         font=("",20),
                                         image=img_dashboard,
-                                        corner_radius=5)
+                                        corner_radius=5,command=self.dashboard)
         botao_dashboard.place(x=0,y=260)
         #botao Users
-        img_usuario=customtkinter.CTkImage(Image.open("usuarios.png"),size=(25,25))
+        img_usuario=customtkinter.CTkImage(Image.open("recursos/imagens_main/usuarios.png"),size=(25,25))
         botao_usuario=customtkinter.CTkButton(self,text="  Users                   ",
                                         fg_color="#101a55",
                                         bg_color="#101a55",
                                         hover_color="#101a95",
                                         font=("",20),
                                         image=img_usuario,
-                                        corner_radius=5)
+                                        corner_radius=5,command=self.Users)
         botao_usuario.place(x=0,y=305)
         #Clientes 
         #img_clientes=customtkinter.CTkImage(Image.open())
-        img_clientes=customtkinter.CTkImage(Image.open("client.png"),size=(25,25))
+        img_clientes=customtkinter.CTkImage(Image.open("recursos/imagens_main/client.png"),size=(25,25))
         botao_cliente=customtkinter.CTkButton(self,text="  Client                  ",fg_color="#101a55",
                                         bg_color="#101a55",
                                         hover_color="#101a95",
@@ -49,7 +75,7 @@ class App(customtkinter.CTk):
         botao_cliente.place(x=0,y=345)
 
         #analises
-        img_analise=customtkinter.CTkImage(Image.open("analise.png"),size=(25,25))
+        img_analise=customtkinter.CTkImage(Image.open("recursos/imagens_main/analise.png"),size=(25,25))
         botao_analises=customtkinter.CTkButton(self,text="  Analytic              ",image=img_analise,
                                         fg_color="#101a55",
                                         bg_color="#101a55",
@@ -58,7 +84,7 @@ class App(customtkinter.CTk):
                                         corner_radius=5)
         botao_analises.place(x=0,y=385)
         #configuraçao
-        img_config=customtkinter.CTkImage(Image.open("config.png"),size=(25,25))
+        img_config=customtkinter.CTkImage(Image.open("recursos/imagens_main/config.png"),size=(25,25))
         botao_config=customtkinter.CTkButton(self,text="  Settings             ",image=img_config,
                                         fg_color="#101a55",  
                                         bg_color="#101a55",
@@ -67,7 +93,7 @@ class App(customtkinter.CTk):
                                         corner_radius=5)
         botao_config.place(x=0,y=425)
         #suporte
-        img_suporte=customtkinter.CTkImage(Image.open("boia.png"),size=(25,25))
+        img_suporte=customtkinter.CTkImage(Image.open("recursos/imagens_main/boia.png"),size=(25,25))
         botao_suporte=customtkinter.CTkButton(self,text="  Support              ",image=img_suporte,
                                         fg_color="#101a55",  
                                         bg_color="#101a55",
@@ -75,6 +101,19 @@ class App(customtkinter.CTk):
                                         font=("",20),
                                         corner_radius=5)
         botao_suporte.place(x=0,y=465)
+        img_report=customtkinter.CTkImage(Image.open("recursos/imagens_main/report.png"),size=(25,25))
+        botao_report=customtkinter.CTkButton(self,text="  Report           ",
+                                        image=img_report,
+                                        fg_color="#101a55",  
+                                        bg_color="#101a55",
+                                        hover_color="#101a95",
+                                        font=("",20),
+                                        corner_radius=5)
+        botao_report.place(x=0,y=510)
+        #foto de perfil usuario
+        img_perfil=customtkinter.CTkImage(Image.open("recursos/imagens_main/usuario-de-perfil.png"))
+        botao_perfil=customtkinter.CTkButton(self)
+        botao_perfil.place(x=0,y=600)
     def funcao_inicial(self):
         print()
     def verificar(self):
@@ -130,9 +169,9 @@ class App(customtkinter.CTk):
                                             bg_color="#101a55") 
         
         texto_overview.place(x=61,y=170)   
-        
+
     def img_falcao(self):
-        imagem=customtkinter.CTkImage(Image.open("falcao_main.png"),size=(200,200))
+        imagem=customtkinter.CTkImage(Image.open("recursos/imagens_main/falcao_main.png"),size=(200,200))
         falcao=customtkinter.CTkLabel(self,
                                         text="",
                                         image=imagem,
@@ -151,24 +190,6 @@ class App(customtkinter.CTk):
 #se a tela de login foi destruida inicia a tela do crud
 app=App()
 app.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 if 1==2: #tela_login.destruiu==True:
