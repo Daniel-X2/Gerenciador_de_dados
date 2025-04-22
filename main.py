@@ -5,7 +5,7 @@ from PIL import Image
 from recursos.banco_de_dados.criptografia.cripto import descriptografar_dados,criptografar_dados
 from recursos.login.login import  Tela_login
 from recursos.banco_de_dados.banco import Funcionario,Clientes
-from recursos.frame.main_frame import DashBoard,Users#exportar o resto aqui
+from recursos.frame.main_frame import DashBoard,Users,Client,Analytic,Settings,Support,Report#exportar o resto aqui
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
@@ -18,24 +18,14 @@ class App(customtkinter.CTk):
         self.frames()
         self.botoes_laterais()
     def frames(self):
-        self.frame_Dash=DashBoard(master=self,width=1200,height=900)
-        self.frame_Users=Users(master=self,width=1200,height=900)
-    def dashboard(self):
-        if self.frame_Dash.place_info():
-            pass
-        elif self.frame_atual!=self.frame_Dash and self.frame_atual!="":
-            self.frame_atual.place_forget()
-            if self.frame_atual==self.frame_Dash:
-                pass
-            else:
-                self.frame_Dash.place(x=200,y=0)
-                self.frame_atual=self.frame_Dash
-        else:
-            if self.frame_atual==self.frame_Dash:
-                pass
-            else:
-                self.frame_Dash.place(x=200,y=0)
-                self.frame_atual=self.frame_Dash
+        self.frame_Dash= DashBoard(master=self,width=1200,height=900)
+        self.frame_Users= Users(master=self,width=1200,height=900)
+        self.frame_Client= Client(master=self,width=1200,height=900)
+        self.frame_Analytic= Analytic(master=self,width=1200,height=900)
+        self.frame_Settings= Settings(master=self,width=1200,height=900)
+        self.frame_Support= Support(master=self,width=1200,height=900)
+        self.frame_Report= Report(master=self,width=1200,height=900)
+    
     def logica_frame(self,frame):
         if frame.place_info():
             pass
@@ -44,13 +34,13 @@ class App(customtkinter.CTk):
             if self.frame_atual==frame:
                 pass
             else:
-                frame.place(x=200,y=0)
+                frame.place(x=205,y=0)
                 self.frame_atual=frame
         else:
             if self.frame_atual==frame:
                 pass
             else:
-                frame.place(x=200,y=0)
+                frame.place(x=205,y=0)
                 self.frame_atual=frame
     def botoes_laterais(self):
         #botao dashboard
@@ -83,7 +73,7 @@ class App(customtkinter.CTk):
                                         hover_color="#101a95",
                                         font=("",20),
                                         image=img_clientes,
-                                        corner_radius=5)
+                                        corner_radius=5,command=lambda : self.logica_frame(frame=self.frame_Client))
         botao_cliente.place(x=0,y=345)
 
         #analises
@@ -93,7 +83,7 @@ class App(customtkinter.CTk):
                                         bg_color="#101a55",
                                         hover_color="#101a95",
                                         font=("",20),
-                                        corner_radius=5)
+                                        corner_radius=5,command=lambda : self.logica_frame(frame=self.frame_Analytic))
         botao_analises.place(x=0,y=385)
         #configuraçao
         img_config=customtkinter.CTkImage(Image.open("recursos/imagens_main/config.png"),size=(25,25))
@@ -102,7 +92,7 @@ class App(customtkinter.CTk):
                                         bg_color="#101a55",
                                         hover_color="#101a95",
                                         font=("",20),
-                                        corner_radius=5)
+                                        corner_radius=5,command=lambda : self.logica_frame(frame=self.frame_Settings))
         botao_config.place(x=0,y=425)
         #suporte
         img_suporte=customtkinter.CTkImage(Image.open("recursos/imagens_main/boia.png"),size=(25,25))
@@ -111,7 +101,7 @@ class App(customtkinter.CTk):
                                         bg_color="#101a55",
                                         hover_color="#101a95",
                                         font=("",20),
-                                        corner_radius=5)
+                                        corner_radius=5,command=lambda : self.logica_frame(frame=self.frame_Support))
         botao_suporte.place(x=0,y=465)
         img_report=customtkinter.CTkImage(Image.open("recursos/imagens_main/report.png"),size=(25,25))
         botao_report=customtkinter.CTkButton(self,text="  Report           ",
@@ -120,11 +110,11 @@ class App(customtkinter.CTk):
                                         bg_color="#101a55",
                                         hover_color="#101a95",
                                         font=("",20),
-                                        corner_radius=5)
+                                        corner_radius=5,command=lambda : self.logica_frame(frame=self.frame_Report))
         botao_report.place(x=0,y=510)
         #foto de perfil usuario
         img_perfil=customtkinter.CTkImage(Image.open("recursos/imagens_main/usuario-de-perfil.png"))
-        botao_perfil=customtkinter.CTkButton(self)
+        botao_perfil=customtkinter.CTkButton(self,image=img_perfil)
         botao_perfil.place(x=0,y=600)
     def funcao_inicial(self):
         print()
