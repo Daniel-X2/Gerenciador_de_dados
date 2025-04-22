@@ -13,10 +13,10 @@ class App(customtkinter.CTk):
         self.funcao_inicial()
         self.img_falcao()
         self.label()
+        self.frame_atual=""
+        
         self.frames()
         self.botoes_laterais()
-        
-        self.frame_atual=""
     def frames(self):
         self.frame_Dash=DashBoard(master=self,width=1200,height=900)
         self.frame_Users=Users(master=self,width=1200,height=900)
@@ -28,32 +28,30 @@ class App(customtkinter.CTk):
             if self.frame_atual==self.frame_Dash:
                 pass
             else:
-                
                 self.frame_Dash.place(x=200,y=0)
                 self.frame_atual=self.frame_Dash
         else:
             if self.frame_atual==self.frame_Dash:
                 pass
             else:
-                
                 self.frame_Dash.place(x=200,y=0)
                 self.frame_atual=self.frame_Dash
-    def Users(self):
-        if self.frame_Users.place_info():
+    def logica_frame(self,frame):
+        if frame.place_info():
             pass
-        elif self.frame_atual!=self.frame_Users and self.frame_atual!="":
+        elif self.frame_atual!=frame and self.frame_atual!="":
             self.frame_atual.place_forget()
-            if self.frame_atual==self.frame_Users:
+            if self.frame_atual==frame:
                 pass
             else:
-                self.frame_Users.place(x=200,y=0)
-                self.frame_atual=self.frame_Users
+                frame.place(x=200,y=0)
+                self.frame_atual=frame
         else:
-            if self.frame_atual==self.frame_Users:
+            if self.frame_atual==frame:
                 pass
             else:
-                self.frame_Users.place(x=200,y=0)
-                self.frame_atual=self.frame_Users
+                frame.place(x=200,y=0)
+                self.frame_atual=frame
     def botoes_laterais(self):
         #botao dashboard
         img_dashboard=customtkinter.CTkImage(Image.open("recursos/imagens_main/camadas.png"),size=(25,25))
@@ -63,7 +61,7 @@ class App(customtkinter.CTk):
                                         hover_color="#101a95",
                                         font=("",20),
                                         image=img_dashboard,
-                                        corner_radius=5,command=self.dashboard)
+                                        corner_radius=5,command=lambda : self.logica_frame(frame=self.frame_Dash))
         botao_dashboard.place(x=0,y=260)
         #botao Users
         img_usuario=customtkinter.CTkImage(Image.open("recursos/imagens_main/usuarios.png"),size=(25,25))
@@ -73,7 +71,9 @@ class App(customtkinter.CTk):
                                         hover_color="#101a95",
                                         font=("",20),
                                         image=img_usuario,
-                                        corner_radius=5,command=self.Users)
+                                        corner_radius=5,
+                                        command=lambda : self.logica_frame(frame=self.frame_Users))
+        #foi necessario colocar um lambda para que a funçao podesse colocar um parametro sem causa bug
         botao_usuario.place(x=0,y=305)
         #Clientes 
         #img_clientes=customtkinter.CTkImage(Image.open())
