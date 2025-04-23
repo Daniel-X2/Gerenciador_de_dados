@@ -15,15 +15,15 @@ class App(customtkinter.CTk):
         self.frame_atual=""
         self.frames()
         self.botoes_laterais()
-        
-        #overview.place(x=205,y=0)
+        self.overview=OverView(master=self,width=1200,height=900,fg_color="#89CFF0")
+        self.overview.place(x=205,y=0)
 
         #self.grafico()
         
     
     def frames(self):
         #n1=customtkinter.CTkFrame()
-        self.overview=OverView(master=self,width=1200,height=900,fg_color="#89CFF0")
+        
         self.frame_Dash=DashBoard(master=self,width=1200,height=900,fg_color="#89CFF0")
         self.frame_Users=Users(master=self,width=1200,height=900,fg_color="#89CFF0")
         self.frame_Client=Client(master=self,width=1200,height=900,fg_color="#89CFF0")

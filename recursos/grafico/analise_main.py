@@ -5,7 +5,7 @@ def grafico():
     y = [10, 20, 25, 30,40,100,120,150,190,200]
 
     # Ajustar o tamanho da figura
-    plt.figure(figsize=(8, 6),facecolor="gray")
+    plt.figure(figsize=(8, 6),facecolor="#89CFF0")
 
     # Plotar o gráfico com personalização
     plt.plot(x, y, color="blue", linewidth=15, marker="o", markersize=10, markerfacecolor="red", label="")

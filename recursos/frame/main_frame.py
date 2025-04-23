@@ -22,7 +22,7 @@ class OverView(customtkinter.CTkFrame):
         super().__init__(master, **kwargs)
 
         # add widgets onto the frame, for example:
-        self.label = customtkinter.CTkLabel(self,text="Bem Vindo!",font=("",30),text_color="black")
+        self.label = customtkinter.CTkLabel(self,text="Bem Vindo!",font=("arial",30,"bold"),text_color="black")
         self.label.place(x=40,y=30)
         texto=customtkinter.CTkLabel(self,text="Aqui esta o resumo das informaçoes do Sistema",font=("",15),text_color="black")
         texto.place(x=30,y=80)
@@ -37,7 +37,7 @@ class OverView(customtkinter.CTkFrame):
         self.grafico()
     def grafico(self):
         img_grafico=customtkinter.CTkImage(Image.open("recursos/grafico/imagem_grafico/grafico.png"),size=(400,200))
-        label_grafico=customtkinter.CTkLabel(self,text="",image=img_grafico,fg_color="gray",bg_color="white",corner_radius=5,width=410,height=210)
+        label_grafico=customtkinter.CTkLabel(self,text="",image=img_grafico,fg_color="#89CFF0",bg_color="#89CFF0",corner_radius=5,width=410,height=210)
         label_grafico.place(x=300,y=250)    
     def frame(self):
 
@@ -55,35 +55,35 @@ class OverView(customtkinter.CTkFrame):
         frame3.place(x=900,y=500)
     def fileira_um(self):
         #posso pegar uma label fazia e simular uma extensao dessa primeira label pra ficar algo mais boniyo
-        texto_usuario=customtkinter.CTkLabel(self,text="""1""",anchor="n",font=("",27),fg_color="gray",corner_radius=5,width=120,height=70)   
-        texto_usuario.place(x=30,y=150)
-        texto_new=customtkinter.CTkLabel(self,text="Novos Usuarios",fg_color="gray",corner_radius=5,width=120,bg_color="gray")
-        texto_new.place(x=30,y=180)
+        texto_usuario=customtkinter.CTkLabel(self,text="""1""",anchor="n",font=("",27),fg_color="#4DA8DA",corner_radius=5,width=120,height=70,text_color="black")   
+        texto_usuario.place(x=60,y=150)
+        texto_new=customtkinter.CTkLabel(self,text="Novos Usuarios",fg_color="#4DA8DA",corner_radius=5,width=120,bg_color="#4DA8DA",text_color="black")
+        texto_new.place(x=60,y=180)
     def fileira_dois(self):
-        texto_usuario=customtkinter.CTkLabel(self,text="""1""",anchor="n",font=("",27),fg_color="gray",corner_radius=5,width=120,height=70)   
-        texto_usuario.place(x=200,y=150)
-        texto_new=customtkinter.CTkLabel(self,text="Clientes ativos",fg_color="gray",corner_radius=5,width=120,bg_color="gray")
-        texto_new.place(x=200,y=180)
+        texto_usuario=customtkinter.CTkLabel(self,text="""1""",anchor="n",font=("",27),fg_color="#4CAF50",corner_radius=5,width=120,height=70,text_color="black")   
+        texto_usuario.place(x=245,y=150)
+        texto_new=customtkinter.CTkLabel(self,text="Clientes ativos",fg_color="#4CAF50",width=120,bg_color="#4CAF50",text_color="black")
+        texto_new.place(x=245,y=180)
     def fileira_tres(self):
-        texto_usuario=customtkinter.CTkLabel(self,text="""69%""",anchor="n",font=("",27),fg_color="gray",corner_radius=5,width=120,height=70)   
-        texto_usuario.place(x=750,y=150)
-        texto_new=customtkinter.CTkLabel(self,text="System Load",fg_color="gray",corner_radius=5,width=120,bg_color="gray")
-        texto_new.place(x=750,y=180)
+        texto_usuario=customtkinter.CTkLabel(self,text="""69%""",anchor="n",font=("",27),text_color="black",fg_color="#FB8C00",corner_radius=5,width=120,height=70)   
+        texto_usuario.place(x=785,y=150)
+        texto_new=customtkinter.CTkLabel(self,text="System Load",fg_color="#FB8C00",width=120,bg_color="gray",text_color="black")
+        texto_new.place(x=785,y=180)
     def fileira_quarto(self):
-        texto_usuario=customtkinter.CTkLabel(self,text="""10%""",anchor="n",font=("",27),fg_color="gray",corner_radius=5,width=120,height=70)   
-        texto_usuario.place(x=900,y=150)
-        texto_new=customtkinter.CTkLabel(self,text="devoluçao",fg_color="gray",corner_radius=5,width=120,bg_color="gray")
-        texto_new.place(x=900,y=180)
+        texto_usuario=customtkinter.CTkLabel(self,text="""10%""",anchor="n",font=("",27),fg_color="#EEDC82",corner_radius=5,width=120,height=70,text_color="black")   
+        texto_usuario.place(x=605,y=150)
+        texto_new=customtkinter.CTkLabel(self,text="devoluçao",fg_color="#EEDC82",width=120,bg_color="#EEDC82",text_color="black")
+        texto_new.place(x=605,y=180)
     def fileira_quinta(self):
-        texto_usuario=customtkinter.CTkLabel(self,text="""$5.50""",anchor="n",font=("",27),fg_color="gray",corner_radius=5,width=120,height=70)   
-        texto_usuario.place(x=350,y=150)
-        texto_new=customtkinter.CTkLabel(self,text="Valor do Dolar",fg_color="gray",corner_radius=5,width=120,bg_color="gray")
-        texto_new.place(x=350,y=180)
+        texto_usuario=customtkinter.CTkLabel(self,text="""$5.50""",anchor="n",text_color="black",font=("",27),fg_color="#00BFA6",corner_radius=5,width=120,height=70)   
+        texto_usuario.place(x=425,y=150)
+        texto_new=customtkinter.CTkLabel(self,text="Valor do Dolar",text_color="black",fg_color="#00BFA6",width=120)
+        texto_new.place(x=425,y=180)
     def fileira_sexta(self):
-        texto_usuario=customtkinter.CTkLabel(self,text_color="black",text="""17""",anchor="n",font=("",27),fg_color="#70CFF9",corner_radius=10,width=120,height=70,bg_color="#89CFF0")   
-        texto_usuario.place(x=520,y=150)
-        texto_new=customtkinter.CTkLabel(self,text_color="black",text="Reclamaçoes",fg_color="#70CFF9",corner_radius=0,width=120,bg_color="#89CFF0")
-        texto_new.place(x=520,y=180)
+        texto_usuario=customtkinter.CTkLabel(self,text_color="black",text="""17""",anchor="n",font=("",27),fg_color="#FF6F61",corner_radius=10,width=120,height=70,bg_color="#89CFF0")   
+        texto_usuario.place(x=980,y=150)
+        texto_new=customtkinter.CTkLabel(self,text_color="black",text="Reclamaçoes",fg_color="#FF6F61",corner_radius=0,width=120,bg_color="#89CFF0")
+        texto_new.place(x=980,y=180)
 class Users(customtkinter.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
