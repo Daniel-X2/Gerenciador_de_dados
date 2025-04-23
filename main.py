@@ -21,9 +21,9 @@ class App(customtkinter.CTk):
         self.grafico()
         
     def grafico(self):
-        img_grafico=customtkinter.CTkImage(Image.open("recursos/grafico/imagem_grafico/grafico.png"),size=(300,300))
-        label_grafico=customtkinter.CTkLabel(self,text="",image=img_grafico)
-        label_grafico.place(x=200,y=200)
+        img_grafico=customtkinter.CTkImage(Image.open("recursos/grafico/imagem_grafico/grafico.png"),size=(400,200))
+        label_grafico=customtkinter.CTkLabel(self,text="",image=img_grafico,fg_color="gray",bg_color="white",corner_radius=5,width=410,height=210)
+        label_grafico.place(x=300,y=250)
     def frames(self):
         #n1=customtkinter.CTkFrame()
         self.frame_Dash=DashBoard(master=self,width=1200,height=900,fg_color="#272952")
