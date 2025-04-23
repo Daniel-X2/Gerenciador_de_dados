@@ -15,24 +15,22 @@ class App(customtkinter.CTk):
         self.frame_atual=""
         self.frames()
         self.botoes_laterais()
-        overview=OverView(master=self,width=1200,height=900,fg_color="white")
-        overview.place(x=205,y=0)
-
-        self.grafico()
         
-    def grafico(self):
-        img_grafico=customtkinter.CTkImage(Image.open("recursos/grafico/imagem_grafico/grafico.png"),size=(400,200))
-        label_grafico=customtkinter.CTkLabel(self,text="",image=img_grafico,fg_color="gray",bg_color="white",corner_radius=5,width=410,height=210)
-        label_grafico.place(x=300,y=250)
+        #overview.place(x=205,y=0)
+
+        #self.grafico()
+        
+    
     def frames(self):
         #n1=customtkinter.CTkFrame()
-        self.frame_Dash=DashBoard(master=self,width=1200,height=900,fg_color="#272952")
-        self.frame_Users=Users(master=self,width=1200,height=900)
-        self.frame_Client=Client(master=self,width=1200,height=900)
-        self.frame_Analytic=Analytic(master=self,width=1200,height=900)
-        self.frame_Settings=Settings(master=self,width=1200,height=900)
-        self.frame_Support=Support(master=self,width=1200,height=900)
-        self.frame_Report=Report(master=self,width=1200,height=900)
+        self.overview=OverView(master=self,width=1200,height=900,fg_color="#89CFF0")
+        self.frame_Dash=DashBoard(master=self,width=1200,height=900,fg_color="#89CFF0")
+        self.frame_Users=Users(master=self,width=1200,height=900,fg_color="#89CFF0")
+        self.frame_Client=Client(master=self,width=1200,height=900,fg_color="#89CFF0")
+        self.frame_Analytic=Analytic(master=self,width=1200,height=900,fg_color="#89CFF0")
+        self.frame_Settings=Settings(master=self,width=1200,height=900,fg_color="#89CFF0")
+        self.frame_Support=Support(master=self,width=1200,height=900,fg_color="#89CFF0")
+        self.frame_Report=Report(master=self,width=1200,height=900,fg_color="#89CFF0")
     def logica_frame(self,frame):
         if frame.place_info():
             pass
@@ -121,7 +119,7 @@ class App(customtkinter.CTk):
         botao_report.place(x=0,y=510)
         #foto de perfil usuario
         img_perfil=customtkinter.CTkImage(Image.open("recursos/imagens_main/usuario-de-perfil.png"))
-        botao_perfil=customtkinter.CTkButton(self,image=img_perfil)
+        botao_perfil=customtkinter.CTkButton(self,image=img_perfil,command=lambda : self.logica_frame(frame=self.overview))
         botao_perfil.place(x=0,y=600)
     def verificar(self):
         usuario_atual=tela_login.usuario_atual
