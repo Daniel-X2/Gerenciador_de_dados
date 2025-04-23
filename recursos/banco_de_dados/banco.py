@@ -27,6 +27,7 @@ class Clientes_base(Base):
     id = Column(Integer, primary_key=True)
     nome = Column(String(50))
     cpf = Column(String)
+    valor_mensal=Column(String)
 # Classe de conexão com o banco de dados
 class Conexao():
     def __init__(self):

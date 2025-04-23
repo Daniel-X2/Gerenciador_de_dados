@@ -1,31 +1,36 @@
-
 import customtkinter
 import os
 from PIL import Image
+
 from recursos.banco_de_dados.criptografia.cripto import descriptografar_dados,criptografar_dados
 from recursos.login.login import  Tela_login
 from recursos.banco_de_dados.banco import Funcionario,Clientes
-from recursos.frame.main_frame import DashBoard,Users,Client,Analytic,Settings,Support,Report#exportar o resto aqui
+from recursos.frame.main_frame import DashBoard,Users,Client,Analytic,Settings,Support,Report,OverView#exportar o resto aqui
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
+        
         self.funcoes_da_janela()
-        self.funcao_inicial()
         self.img_falcao()
         self.label()
         self.frame_atual=""
-        
         self.frames()
         self.botoes_laterais()
+        overview=OverView(master=self,width=1200,height=900,fg_color="#272952")
+        overview.place(x=205,y=0)
+
+        
+        
+        
     def frames(self):
-        self.frame_Dash= DashBoard(master=self,width=1200,height=900)
+        #n1=customtkinter.CTkFrame()
+        self.frame_Dash= DashBoard(master=self,width=1200,height=900,fg_color="#272952")
         self.frame_Users= Users(master=self,width=1200,height=900)
         self.frame_Client= Client(master=self,width=1200,height=900)
         self.frame_Analytic= Analytic(master=self,width=1200,height=900)
         self.frame_Settings= Settings(master=self,width=1200,height=900)
         self.frame_Support= Support(master=self,width=1200,height=900)
         self.frame_Report= Report(master=self,width=1200,height=900)
-    
     def logica_frame(self,frame):
         if frame.place_info():
             pass
@@ -116,8 +121,6 @@ class App(customtkinter.CTk):
         img_perfil=customtkinter.CTkImage(Image.open("recursos/imagens_main/usuario-de-perfil.png"))
         botao_perfil=customtkinter.CTkButton(self,image=img_perfil)
         botao_perfil.place(x=0,y=600)
-    def funcao_inicial(self):
-        print()
     def verificar(self):
         usuario_atual=tela_login.usuario_atual
         senha_atual=tela_login.senha_atual
@@ -171,7 +174,6 @@ class App(customtkinter.CTk):
                                             bg_color="#101a55") 
         
         texto_overview.place(x=61,y=170)   
-
     def img_falcao(self):
         imagem=customtkinter.CTkImage(Image.open("recursos/imagens_main/falcao_main.png"),size=(200,200))
         falcao=customtkinter.CTkLabel(self,
@@ -179,10 +181,6 @@ class App(customtkinter.CTk):
                                         image=imagem,
                                         fg_color="#101a55")
         falcao.place(x=1,y=0)
-        
-
-
-
 
 #aqui inicia a tela de login
 
