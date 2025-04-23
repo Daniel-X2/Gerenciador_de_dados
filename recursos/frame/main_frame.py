@@ -29,27 +29,43 @@ class OverView(customtkinter.CTkFrame):
         self.fileira_dois()
         self.fileira_tres()
         self.fileira_quarto()
+        self.frame()
+    def frame(self):
+
+        frame=customtkinter.CTkFrame(self)
+        frame.place(x=50,y=500)
+
+        frame1=customtkinter.CTkFrame(self)
+        frame1.place(x=300,y=500)
+
+        frame2=customtkinter.CTkFrame(self)
+        frame2.place(x=600,y=500)
+
+
+        frame3=customtkinter.CTkFrame(self)
+        frame3.place(x=900,y=500)
     def fileira_um(self):
         #posso pegar uma label fazia e simular uma extensao dessa primeira label pra ficar algo mais boniyo
-        texto_usuario=customtkinter.CTkLabel(self,text="""1""",anchor="n",font=("",27),fg_color="gray",corner_radius=5,width=120,height=90)   
-        texto_usuario.place(x=30,y=200)
+        texto_usuario=customtkinter.CTkLabel(self,text="""1""",anchor="n",font=("",27),fg_color="gray",corner_radius=5,width=120,height=70)   
+        texto_usuario.place(x=30,y=150)
         texto_new=customtkinter.CTkLabel(self,text="Novos Usuarios",fg_color="gray",corner_radius=5,width=120,bg_color="gray")
-        texto_new.place(x=30,y=250)
+        texto_new.place(x=30,y=180)
     def fileira_dois(self):
-        texto_usuario=customtkinter.CTkLabel(self,text="""1""",anchor="n",font=("",27),fg_color="gray",corner_radius=5,width=120,height=90)   
-        texto_usuario.place(x=200,y=200)
+        texto_usuario=customtkinter.CTkLabel(self,text="""1""",anchor="n",font=("",27),fg_color="gray",corner_radius=5,width=120,height=70)   
+        texto_usuario.place(x=200,y=150)
         texto_new=customtkinter.CTkLabel(self,text="Novos Usuarios",fg_color="gray",corner_radius=5,width=120,bg_color="gray")
-        texto_new.place(x=200,y=250)
+        texto_new.place(x=200,y=180)
     def fileira_tres(self):
-        texto_usuario=customtkinter.CTkLabel(self,text="""1""",anchor="n",font=("",27),fg_color="gray",corner_radius=5,width=120,height=90)   
-        texto_usuario.place(x=350,y=200)
+        texto_usuario=customtkinter.CTkLabel(self,text="""1""",anchor="n",font=("",27),fg_color="gray",corner_radius=5,width=120,height=70)   
+        texto_usuario.place(x=750,y=150)
         texto_new=customtkinter.CTkLabel(self,text="Novos Usuarios",fg_color="gray",corner_radius=5,width=120,bg_color="gray")
-        texto_new.place(x=350,y=250)
+        texto_new.place(x=750,y=180)
     def fileira_quarto(self):
-        texto_usuario=customtkinter.CTkLabel(self,text="""1""",anchor="n",font=("",27),fg_color="gray",corner_radius=5,width=120,height=90)   
-        texto_usuario.place(x=500,y=200)
+        texto_usuario=customtkinter.CTkLabel(self,text="""1""",anchor="n",font=("",27),fg_color="gray",corner_radius=5,width=120,height=70)   
+        texto_usuario.place(x=900,y=150)
         texto_new=customtkinter.CTkLabel(self,text="Novos Usuarios",fg_color="gray",corner_radius=5,width=120,bg_color="gray")
-        texto_new.place(x=500,y=250)    
+        texto_new.place(x=900,y=180)
+        
 class Users(customtkinter.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
