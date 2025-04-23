@@ -1,7 +1,6 @@
 import customtkinter
 import os
 from PIL import Image
-
 from recursos.banco_de_dados.criptografia.cripto import descriptografar_dados,criptografar_dados
 from recursos.login.login import  Tela_login
 from recursos.banco_de_dados.banco import Funcionario,Clientes
@@ -16,21 +15,24 @@ class App(customtkinter.CTk):
         self.frame_atual=""
         self.frames()
         self.botoes_laterais()
-        overview=OverView(master=self,width=1200,height=900,fg_color="#272952")
+        overview=OverView(master=self,width=1200,height=900,fg_color="white")
         overview.place(x=205,y=0)
 
+        self.grafico()
         
-        
-        
+    def grafico(self):
+        img_grafico=customtkinter.CTkImage(Image.open("recursos/grafico/imagem_grafico/grafico.png"),size=(300,300))
+        label_grafico=customtkinter.CTkLabel(self,text="",image=img_grafico)
+        label_grafico.place(x=200,y=200)
     def frames(self):
         #n1=customtkinter.CTkFrame()
-        self.frame_Dash= DashBoard(master=self,width=1200,height=900,fg_color="#272952")
-        self.frame_Users= Users(master=self,width=1200,height=900)
-        self.frame_Client= Client(master=self,width=1200,height=900)
-        self.frame_Analytic= Analytic(master=self,width=1200,height=900)
-        self.frame_Settings= Settings(master=self,width=1200,height=900)
-        self.frame_Support= Support(master=self,width=1200,height=900)
-        self.frame_Report= Report(master=self,width=1200,height=900)
+        self.frame_Dash=DashBoard(master=self,width=1200,height=900,fg_color="#272952")
+        self.frame_Users=Users(master=self,width=1200,height=900)
+        self.frame_Client=Client(master=self,width=1200,height=900)
+        self.frame_Analytic=Analytic(master=self,width=1200,height=900)
+        self.frame_Settings=Settings(master=self,width=1200,height=900)
+        self.frame_Support=Support(master=self,width=1200,height=900)
+        self.frame_Report=Report(master=self,width=1200,height=900)
     def logica_frame(self,frame):
         if frame.place_info():
             pass

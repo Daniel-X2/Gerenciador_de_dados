@@ -21,9 +21,9 @@ class OverView(customtkinter.CTkFrame):
         super().__init__(master, **kwargs)
 
         # add widgets onto the frame, for example:
-        self.label = customtkinter.CTkLabel(self,text="Bem Vindo!",font=("",30))
+        self.label = customtkinter.CTkLabel(self,text="Bem Vindo!",font=("",30),text_color="black")
         self.label.place(x=40,y=30)
-        texto=customtkinter.CTkLabel(self,text="Aqui esta o resumo das informaçoes do Sistema",font=("",15))
+        texto=customtkinter.CTkLabel(self,text="Aqui esta o resumo das informaçoes do Sistema",font=("",15),text_color="black")
         texto.place(x=30,y=80)
         self.fileira_um()
         self.fileira_dois()
@@ -32,7 +32,7 @@ class OverView(customtkinter.CTkFrame):
         self.frame()
     def frame(self):
 
-        frame=customtkinter.CTkFrame(self)
+        frame=customtkinter.CTkFrame(self,corner_radius=10)
         frame.place(x=50,y=500)
 
         frame1=customtkinter.CTkFrame(self)
