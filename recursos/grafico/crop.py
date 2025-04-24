@@ -14,5 +14,5 @@ area_de_recorte = ((margem+63), (margem+30), largura - margem, altura - (margem-
 imagem_recortada = imagem.crop(area_de_recorte)
 
 # Salvar ou exibir a imagem recortada
-imagem_recortada.save("recursos/grafico/imagem_grafico/grafico1.png")
+imagem_recortada.save("recursos/grafico/imagem_grafico/grafico.png")
 #imagem_recortada.show()

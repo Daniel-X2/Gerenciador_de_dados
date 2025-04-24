@@ -1,6 +1,7 @@
 from PIL import Image
 
 import customtkinter
+
 class DashBoard(customtkinter.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
@@ -17,8 +18,9 @@ class OverView(customtkinter.CTkFrame):
 
         # add widgets onto the frame, for example:
         self.bem_vindo()
-        self.frames()
+        
         self.grafico()
+        self.funcoes_iniciais()
     def bem_vindo(self):
         texto_bem_vindo = customtkinter.CTkLabel(self,text="Bem Vindo!",font=("arial",30,"bold"),text_color="black")
         texto_bem_vindo.place(x=40,y=30)
@@ -28,21 +30,56 @@ class OverView(customtkinter.CTkFrame):
         img_grafico=customtkinter.CTkImage(Image.open("recursos/grafico/imagem_grafico/grafico.png"),size=(700,250))
         label_grafico=customtkinter.CTkLabel(self,text="",image=img_grafico,fg_color="#89CFF0",bg_color="#89CFF0",)
         label_grafico.place(x=200,y=234)
-            
+    def funcoes_iniciais(self):
+        self.card_usuario()
+        self.card_clientes()
+        self.card_dolar()
+        self.card_devolucao()
+        self.card_sistema()
+        self.card_reclamacao()
+        self.frames()
+        self.botoes_acao()
+        self.status_sistema()
+        self.atividade_recente()
+        self.report()
     def frames(self):
 
-        frame_acao=customtkinter.CTkFrame(self,corner_radius=10)
-        frame_acao.place(x=50,y=500)
+        self.frame_acao=customtkinter.CTkFrame(self,corner_radius=10)
+        self.frame_acao.place(x=50,y=500)
 
-        frame_atividade=customtkinter.CTkFrame(self)
-        frame_atividade.place(x=300,y=500)
+        self.frame_atividade=customtkinter.CTkFrame(self)
+        self.frame_atividade.place(x=300,y=500)
 
-        frame_report=customtkinter.CTkFrame(self)
-        frame_report.place(x=600,y=500)
+        self.frame_report=customtkinter.CTkFrame(self)
+        self.frame_report.place(x=600,y=500)
 
 
-        frame_status=customtkinter.CTkFrame(self)
-        frame_status.place(x=900,y=500)
+        self.frame_status=customtkinter.CTkFrame(self)
+        self.frame_status.place(x=900,y=500)
+    def report(self):
+        titulo=customtkinter.CTkLabel(self.frame_report,text="Report",font=("arial",17,"italic"))
+        titulo.place(x=0,y=0)
+        texto_report=customtkinter.CTkLabel(self.frame_report,text="aqui aconteceu nada mane")
+        texto_report.place(x=0,y=40)
+    def atividade_recente (self):
+        titulo=customtkinter.CTkLabel(self.frame_atividade,text="Atividade Recente",font=("arial",17,"italic"))
+        titulo.place(x=0,y=0)
+        texto_atividade=customtkinter.CTkLabel(self.frame_atividade,text="aqui aconteceu nada mane")
+        texto_atividade.place(x=0,y=40)
+    def status_sistema(self):
+        titulo=customtkinter.CTkLabel(self.frame_status,text="Status do Sistema",font=("arial",17,"italic"))
+        titulo.place(x=0,y=0)
+        status_sys=customtkinter.CTkLabel(self.frame_status,text="nada aconteceu nessa bixiga",font=("arial",15,"italic"))
+        status_sys.place(x=0,y=50)
+    def botoes_acao(self):
+        titulo=customtkinter.CTkLabel(self.frame_acao,text="Açao Rapida",font=("arial",17,"italic"))
+        titulo.place(x=0,y=0)
+        add_usuario=customtkinter.CTkButton(self.frame_acao,text="• Adicionar Usuario",font=("arial",15,"italic"),fg_color="#242424")
+        add_usuario.place(x=20,y=40)
+        reportar=customtkinter.CTkButton(self.frame_acao,text="• Reportar     ",font=("arial",15,"italic"),fg_color="#242424")
+        reportar.place(x=20,y=70)
+        configurar=customtkinter.CTkButton(self.frame_acao,text="• Settings",fg_color="#242424",font=("arial",15,"italic"))
+        configurar.place(x=0,y=100)
     def card_usuario(self):
         #posso pegar uma label fazia e simular uma extensao dessa primeira label pra ficar algo mais boniyo
         texto_usuario=customtkinter.CTkLabel(self,text="""1""",anchor="n",font=("",27),fg_color="#4DA8DA",corner_radius=5,width=120,height=70,text_color="black")   

@@ -8,13 +8,13 @@ def grafico():
     plt.figure(figsize=(8, 6),facecolor="#89CFF0")
 
     # Plotar o gráfico com personalização
-    plt.plot(x, y, color="blue", linewidth=15, marker="o", markersize=10, markerfacecolor="red", label="")
-
+    plt.plot(x, y, color="blue", linewidth=5, marker="o", markersize=10, markerfacecolor="red", label="")
+    plt.gca().set_facecolor("#89CFF0")
     # Adicionar título e rótulos
     plt.title("", fontsize=16)
     plt.xlabel("Eixo X")
     plt.ylabel("Eixo Y")
-
+    plt.grid(True)
     # Adicionar grade e legenda
 
     
@@ -23,6 +23,7 @@ def grafico():
     #plt.axis('off')
     #plt.gca().set_facecolor("lightgray")
     # Exibir e salvar o gráfico
+    #plt.show()
     plt.savefig("recursos/grafico/imagem_grafico/grafico.png", dpi=1000)
     
 
