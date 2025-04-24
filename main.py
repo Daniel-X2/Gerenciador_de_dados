@@ -4,28 +4,25 @@ from PIL import Image
 from recursos.banco_de_dados.criptografia.cripto import descriptografar_dados,criptografar_dados
 from recursos.login.login import  Tela_login
 from recursos.banco_de_dados.banco import Funcionario,Clientes
-from recursos.frame.main_frame import DashBoard,Users,Client,Analytic,Settings,Support,Report,OverView#exportar o resto aqui
+from recursos.frame.main_frame import DashBoard,Users,Client,Analytic,Settings,Support,Report#exportar o resto aqui
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
-        
+        self.funcoes_iniciais()
+
+    def funcoes_iniciais(self):
         self.funcoes_da_janela()
         self.img_falcao()
         self.label()
         self.frame_atual=""
         self.frames()
         self.botoes_laterais()
-        self.overview=OverView(master=self,width=1200,height=900,fg_color="#89CFF0")
-        self.overview.place(x=205,y=0)
-
-        #self.grafico()
-        
-    
+        self.logica_frame(self.frame_Users)
     def frames(self):
         #n1=customtkinter.CTkFrame()
         
-        self.frame_Dash=DashBoard(master=self,width=1200,height=900,fg_color="#89CFF0")
-        self.frame_Users=Users(master=self,width=1200,height=900,fg_color="#89CFF0")
+        self.frame_Dash=DashBoard(master=self,width=1200,height=900,fg_color="#82b3f0")
+        self.frame_Users=Users(master=self,width=1200,height=900,fg_color="#84e5df")
         self.frame_Client=Client(master=self,width=1200,height=900,fg_color="#89CFF0")
         self.frame_Analytic=Analytic(master=self,width=1200,height=900,fg_color="#89CFF0")
         self.frame_Settings=Settings(master=self,width=1200,height=900,fg_color="#89CFF0")

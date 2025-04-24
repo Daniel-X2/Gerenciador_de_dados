@@ -2,17 +2,9 @@ from PIL import Image
 
 import customtkinter
 
-class DashBoard(customtkinter.CTkFrame):
-    def __init__(self, master, **kwargs):
-        super().__init__(master, **kwargs)
-        
-        # add widgets onto the frame, for example:
-        self.label = customtkinter.CTkLabel(self,text="dashboard")
-        self.label.place(x=0,y=0)
-        n1=customtkinter.CTkButton(self)
-        n1.place(x=50,y=50)
 
-class OverView(customtkinter.CTkFrame):
+
+class DashBoard(customtkinter.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
 
@@ -82,14 +74,14 @@ class OverView(customtkinter.CTkFrame):
         configurar.place(x=0,y=100)
     def card_usuario(self):
         #posso pegar uma label fazia e simular uma extensao dessa primeira label pra ficar algo mais boniyo
-        texto_usuario=customtkinter.CTkLabel(self,text="""1""",anchor="n",font=("",27),fg_color="#4DA8DA",corner_radius=5,width=120,height=70,text_color="black")   
+        texto_usuario=customtkinter.CTkLabel(self,text="""1""",anchor="n",font=("",27),fg_color="#a3d8be",corner_radius=5,width=120,height=70,text_color="black")   
         texto_usuario.place(x=60,y=150)
-        texto_new=customtkinter.CTkLabel(self,text="Novos Usuarios",fg_color="#4DA8DA",corner_radius=5,width=120,bg_color="#4DA8DA",text_color="black")
+        texto_new=customtkinter.CTkLabel(self,text="Novos Usuarios",fg_color="#a3d8be",corner_radius=5,width=120,bg_color="#a3d8be",text_color="black")
         texto_new.place(x=60,y=180)
     def card_clientes(self):
-        texto_usuario=customtkinter.CTkLabel(self,text="""1""",anchor="n",font=("",27),fg_color="#4CAF50",corner_radius=5,width=120,height=70,text_color="black")   
+        texto_usuario=customtkinter.CTkLabel(self,text="""1""",anchor="n",font=("",27),fg_color="#2eb07e",corner_radius=5,width=120,height=70,text_color="black")   
         texto_usuario.place(x=245,y=150)
-        texto_new=customtkinter.CTkLabel(self,text="Clientes ativos",fg_color="#4CAF50",width=120,bg_color="#4CAF50",text_color="black")
+        texto_new=customtkinter.CTkLabel(self,text="Clientes ativos",fg_color="#2eb07e",width=120,bg_color="#84e5df",text_color="black")
         texto_new.place(x=245,y=180)
     def card_sistema(self):
         texto_usuario=customtkinter.CTkLabel(self,text="""69%""",anchor="n",font=("",27),text_color="black",fg_color="#FB8C00",corner_radius=5,width=120,height=70)   
@@ -102,9 +94,9 @@ class OverView(customtkinter.CTkFrame):
         texto_new=customtkinter.CTkLabel(self,text="devoluçao",fg_color="#EEDC82",width=120,bg_color="#EEDC82",text_color="black")
         texto_new.place(x=605,y=180)
     def card_dolar(self):
-        texto_usuario=customtkinter.CTkLabel(self,text="""$5.50""",anchor="n",text_color="black",font=("",27),fg_color="#00BFA6",corner_radius=5,width=120,height=70)   
+        texto_usuario=customtkinter.CTkLabel(self,text="""$5.50""",anchor="n",text_color="black",font=("",27),fg_color="#5ebeb7",corner_radius=5,width=120,height=70)   
         texto_usuario.place(x=425,y=150)
-        texto_new=customtkinter.CTkLabel(self,text="Valor do Dolar",text_color="black",fg_color="#00BFA6",width=120)
+        texto_new=customtkinter.CTkLabel(self,text="Valor do Dolar",text_color="black",fg_color="#5ebeb7",width=120)
         texto_new.place(x=425,y=180)
     def card_reclamacao(self):
         texto_usuario=customtkinter.CTkLabel(self,text_color="black",text="""17""",anchor="n",font=("",27),fg_color="#FF6F61",corner_radius=10,width=120,height=70,bg_color="#89CFF0")   
@@ -114,13 +106,25 @@ class OverView(customtkinter.CTkFrame):
 class Users(customtkinter.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
+        self.entrada()
+        usu_text=customtkinter.CTkLabel(self,text="Usuarios",text_color="black",font=("arial",25,"bold"))
+        usu_text.place(x=500,y=50)
 
-        # add widgets onto the frame, for example:
-        self.label = customtkinter.CTkLabel(self,text="users")
-        self.label.place(x=0,y=0)
+        adi=customtkinter.CTkLabel(self,text="Adicionar Usuario",text_color="black",font=("arial",19,"italic"))
+        adi.place(x=50,y=120)
 
+        
+    def entrada(self):
+        entrada_nome=customtkinter.CTkEntry(self,font=("arial",15),width=230,text_color="white",placeholder_text="nome",placeholder_text_color="gray")
+        entrada_nome.place(x=50,y=160)
+        entrada_email=customtkinter.CTkEntry(self,font=("arial",15),width=230,text_color="white",placeholder_text="Email",placeholder_text_color="gray")
+        entrada_email.place(x=286,y=160)
 
+        combo=customtkinter.CTkComboBox(self,values=["Funçao","estagiario","funcionario","Rh"])
+        combo.place(x=530,y=160)
 
+        combo1=customtkinter.CTkComboBox(self,values=["Nivel de acesso","Usuario","Adminitrador"])
+        combo1.place(x=680,y=160)
 class Client(customtkinter.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)

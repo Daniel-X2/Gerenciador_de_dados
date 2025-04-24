@@ -5,15 +5,21 @@ def grafico():
     y = [10, 20, 25, 30,40,100,120,150,190,200]
 
     # Ajustar o tamanho da figura
-    plt.figure(figsize=(8, 6),facecolor="#89CFF0")
-
+    
+    plt.figure(figsize=(8, 6),facecolor="#82b3f0")
+    ax = plt.gca()
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
     # Plotar o gráfico com personalização
-    plt.plot(x, y, color="blue", linewidth=5, marker="o", markersize=10, markerfacecolor="red", label="")
-    plt.gca().set_facecolor("#89CFF0")
+    plt.plot(x, y, color="#2253cb", linewidth=3, marker="o", markersize=8, markerfacecolor="#2253cb", label="")
+    plt.gca().set_facecolor("#82b3f0")
+    plt.xticks([])
     # Adicionar título e rótulos
     plt.title("", fontsize=16)
-    plt.xlabel("Eixo X")
-    plt.ylabel("Eixo Y")
+    plt.xlabel("")
+    plt.ylabel("")
     plt.grid(True)
     # Adicionar grade e legenda
 
