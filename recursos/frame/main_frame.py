@@ -103,6 +103,10 @@ class DashBoard(customtkinter.CTkFrame):
         texto_usuario.place(x=980,y=150)
         texto_new=customtkinter.CTkLabel(self,text_color="black",text="Reclamaçoes",fg_color="#FF6F61",corner_radius=0,width=120,bg_color="#89CFF0")
         texto_new.place(x=980,y=180)
+
+
+
+
 class Users(customtkinter.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
@@ -112,7 +116,7 @@ class Users(customtkinter.CTkFrame):
 
         adi=customtkinter.CTkLabel(self,text="Adicionar Usuario",text_color="black",font=("arial",19,"italic"))
         adi.place(x=50,y=120)
-
+        self.scroll()
         
     def entrada(self):
         entrada_nome=customtkinter.CTkEntry(self,font=("arial",15),width=230,text_color="white",placeholder_text="nome",placeholder_text_color="gray")
@@ -120,11 +124,21 @@ class Users(customtkinter.CTkFrame):
         entrada_email=customtkinter.CTkEntry(self,font=("arial",15),width=230,text_color="white",placeholder_text="Email",placeholder_text_color="gray")
         entrada_email.place(x=286,y=160)
 
-        combo=customtkinter.CTkComboBox(self,values=["Funçao","estagiario","funcionario","Rh"])
+        combo=customtkinter.CTkOptionMenu(self,values=["Funçao","estagiario","funcionario","Rh"])
         combo.place(x=530,y=160)
 
-        combo1=customtkinter.CTkComboBox(self,values=["Nivel de acesso","Usuario","Adminitrador"])
+        combo1=customtkinter.CTkOptionMenu(self,values=["Nivel de acesso","Usuario","Adminitrador"])
         combo1.place(x=680,y=160)
+
+        add=customtkinter.CTkButton(self,text="Add",corner_radius=20,width=60)
+        add.place(x=830,y=160)
+    def scroll(self):
+        self.campo=customtkinter.CTkScrollableFrame(self,width=1138,height=504)
+        self.campo.place(x=0,y=200)
+        entra=customtkinter.CTkEntry(self.campo)
+        entra.grid(row=0,column=0)
+        entra=customtkinter.CTkEntry(self.campo)
+        entra.grid(row=0,column=1)
 class Client(customtkinter.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
