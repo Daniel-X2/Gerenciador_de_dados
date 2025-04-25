@@ -17,7 +17,7 @@ class App(customtkinter.CTk):
         self.frame_atual=""
         self.frames()
         self.botoes_laterais()
-        self.logica_frame(self.frame_Users)
+        self.logica_frame(self.frame_Client)
     def frames(self):
         #n1=customtkinter.CTkFrame()
         
@@ -181,8 +181,8 @@ class App(customtkinter.CTk):
 
 #aqui inicia a tela de login
 
-#tela_login=Tela_login()
-#tela_login.mainloop()
+tela_login=Tela_login()
+tela_login.mainloop()
 
 #se a tela de login foi destruida inicia a tela do crud
 app=App()

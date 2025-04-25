@@ -104,9 +104,6 @@ class DashBoard(customtkinter.CTkFrame):
         texto_new=customtkinter.CTkLabel(self,text_color="black",text="Reclamaçoes",fg_color="#FF6F61",corner_radius=0,width=120,bg_color="#89CFF0")
         texto_new.place(x=980,y=180)
 
-
-
-
 class Users(customtkinter.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
@@ -171,10 +168,55 @@ class Users(customtkinter.CTkFrame):
 class Client(customtkinter.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
-
+        self.entrada()
+        self.texto_coluna()
+    def texto_coluna(self):
+        texto_id=customtkinter.CTkLabel(self.campo,width=50,text="id",corner_radius=0,bg_color="#565b5e")
+        texto_id.grid(row=0,column=0)
+        texto_nome=customtkinter.CTkLabel(self.campo,width=230,text="Nome",corner_radius=0,bg_color="#565b5e")
+        texto_nome.grid(row=0,column=1)
+        texto_email=customtkinter.CTkLabel(self.campo,width=270,text="Email",corner_radius=0,bg_color="#565b5e")
+        texto_email.grid(row=0,column=2)
+    def entrada(self):
         # add widgets onto the frame, for example:
         self.label = customtkinter.CTkLabel(self,text="client")
+        self.campo=customtkinter.CTkScrollableFrame(self,width=1138,height=504)
+        self.campo.place(x=0,y=200)
+        num=customtkinter.StringVar(value="1")
+        numero=customtkinter.CTkEntry(self.campo,width=50,textvariable=num,corner_radius=0)
+        numero.grid(row=1,column=0)
+
+
+        n1=customtkinter.StringVar(value="anthony ferreira de lima")
+        entra=customtkinter.CTkEntry(self.campo,font=("arial",14),width=230,placeholder_text="nome",textvariable=n1,corner_radius=0)
+        entra.grid(row=1,column=1)
+        n2=customtkinter.StringVar(value="athony.g2455@gmail.com")
+        entra=customtkinter.CTkEntry(self.campo,font=("arial",14),width=270,textvariable=n2,corner_radius=0)
+        entra.grid(row=1,column=2)
+        combo=customtkinter.CTkOptionMenu(self.campo,values=["Funçao","estagiario","funcionario","Rh"],corner_radius=0,fg_color="#242424")
+        combo.grid(row=1,column=3)
+
+        combo1=customtkinter.CTkOptionMenu(self.campo,values=["inativo","ativo"],corner_radius=0,fg_color="#242424")
+        combo1.grid(row=1,column=4)
+
         
+
+        num=customtkinter.StringVar(value="2")
+        numero=customtkinter.CTkEntry(self.campo,width=50,textvariable=num,corner_radius=0)
+        numero.grid(row=2,column=0)
+
+        n1=customtkinter.StringVar(value="Daniel da silva")
+        entra=customtkinter.CTkEntry(self.campo,font=("arial",14),width=230,placeholder_text="nome",textvariable=n1,corner_radius=0)
+        entra.grid(row=2,column=1)
+        n2=customtkinter.StringVar(value="foconoaltar@gmail.com")
+        entra=customtkinter.CTkEntry(self.campo,font=("arial",14),width=270,textvariable=n2,corner_radius=0)
+        entra.grid(row=2,column=2)
+        combo=customtkinter.CTkOptionMenu(self.campo,values=["Funçao","estagiario","funcionario","Rh"],corner_radius=0,fg_color="#242424")
+        combo.grid(row=2,column=3)
+
+        combo1=customtkinter.CTkOptionMenu(self.campo,values=["ativo","inativo"],corner_radius=0,fg_color="#242424")
+        combo1.grid(row=2,column=4)
+
 class Analytic(customtkinter.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
