@@ -135,10 +135,39 @@ class Users(customtkinter.CTkFrame):
     def scroll(self):
         self.campo=customtkinter.CTkScrollableFrame(self,width=1138,height=504)
         self.campo.place(x=0,y=200)
-        entra=customtkinter.CTkEntry(self.campo)
-        entra.grid(row=0,column=0)
-        entra=customtkinter.CTkEntry(self.campo)
+        num=customtkinter.StringVar(value="1")
+        numero=customtkinter.CTkEntry(self.campo,width=50,textvariable=num,corner_radius=0)
+        numero.grid(row=0,column=0)
+
+
+        n1=customtkinter.StringVar(value="anthony ferreira de lima")
+        entra=customtkinter.CTkEntry(self.campo,font=("arial",14),width=230,placeholder_text="nome",textvariable=n1,corner_radius=0)
         entra.grid(row=0,column=1)
+        n2=customtkinter.StringVar(value="athony.g2455@gmail.com")
+        entra=customtkinter.CTkEntry(self.campo,font=("arial",14),width=270,textvariable=n2,corner_radius=0)
+        entra.grid(row=0,column=2)
+        combo=customtkinter.CTkOptionMenu(self.campo,values=["Funçao","estagiario","funcionario","Rh"],corner_radius=0,fg_color="#242424")
+        combo.grid(row=0,column=3)
+
+        combo1=customtkinter.CTkOptionMenu(self.campo,values=["Nivel de acesso","Usuario","Adminitrador"],corner_radius=0,fg_color="#242424")
+        combo1.grid(row=0,column=4)
+
+
+        num=customtkinter.StringVar(value="2")
+        numero=customtkinter.CTkEntry(self.campo,width=50,textvariable=num,corner_radius=0)
+        numero.grid(row=1,column=0)
+
+        n1=customtkinter.StringVar(value="Daniel da silva")
+        entra=customtkinter.CTkEntry(self.campo,font=("arial",14),width=230,placeholder_text="nome",textvariable=n1,corner_radius=0)
+        entra.grid(row=1,column=1)
+        n2=customtkinter.StringVar(value="foconoaltar@gmail.com")
+        entra=customtkinter.CTkEntry(self.campo,font=("arial",14),width=270,textvariable=n2,corner_radius=0)
+        entra.grid(row=1,column=2)
+        combo=customtkinter.CTkOptionMenu(self.campo,values=["Funçao","estagiario","funcionario","Rh"],corner_radius=0,fg_color="#242424")
+        combo.grid(row=1,column=3)
+
+        combo1=customtkinter.CTkOptionMenu(self.campo,values=["Nivel de acesso","Usuario","Adminitrador"],corner_radius=0,fg_color="#242424")
+        combo1.grid(row=1,column=4)
 class Client(customtkinter.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
