@@ -1,7 +1,7 @@
 from PIL import Image
 
 import customtkinter
-
+import webbrowser 
 
 
 class DashBoard(customtkinter.CTkFrame):
@@ -113,58 +113,76 @@ class Users(customtkinter.CTkFrame):
 
         adi=customtkinter.CTkLabel(self,text="Adicionar Usuario",text_color="black",font=("arial",19,"italic"))
         adi.place(x=50,y=120)
-        self.scroll()
         
+        self.scroll()
+    def texto_coluna(self):
+        texto_id=customtkinter.CTkLabel(self.campo,width=50,text="id",corner_radius=0,bg_color="#565b5e")
+        texto_id.grid(row=0,column=0)
+        texto_nome=customtkinter.CTkLabel(self.campo,width=230,text="Nome",corner_radius=0,bg_color="#565b5e")
+        texto_nome.grid(row=0,column=1)
+        texto_email=customtkinter.CTkLabel(self.campo,width=270,text="Email",corner_radius=0,bg_color="#565b5e")
+        texto_email.grid(row=0,column=2) 
+        numero=customtkinter.CTkLabel(self.campo,width=140,text="Nivel de acesso",corner_radius=0,bg_color="#565b5e")
+        numero.grid(row=0,column=4)
+        numero=customtkinter.CTkLabel(self.campo,width=140,text="Cargo",corner_radius=0,bg_color="#565b5e")
+
+        numero.grid(row=0,column=3)
     def entrada(self):
-        entrada_nome=customtkinter.CTkEntry(self,font=("arial",15),width=230,text_color="white",placeholder_text="nome",placeholder_text_color="gray")
-        entrada_nome.place(x=50,y=160)
-        entrada_email=customtkinter.CTkEntry(self,font=("arial",15),width=230,text_color="white",placeholder_text="Email",placeholder_text_color="gray")
-        entrada_email.place(x=286,y=160)
+        entrada_nome=customtkinter.CTkEntry(self,corner_radius=0,font=("arial",15),width=230,text_color="white",placeholder_text="nome",placeholder_text_color="gray")
+        entrada_nome.place(x=55,y=160)
+        entrada_email=customtkinter.CTkEntry(self,corner_radius=0,font=("arial",15),width=270,text_color="white",placeholder_text="Email",placeholder_text_color="gray")
+        entrada_email.place(x=285,y=160)
 
-        combo=customtkinter.CTkOptionMenu(self,values=["Funçao","estagiario","funcionario","Rh"])
-        combo.place(x=530,y=160)
+        combo=customtkinter.CTkOptionMenu(self,values=["Cargo","estagiario","funcionario","Rh"],corner_radius=0)
+        combo.place(x=555,y=160)
 
-        combo1=customtkinter.CTkOptionMenu(self,values=["Nivel de acesso","Usuario","Adminitrador"])
-        combo1.place(x=680,y=160)
+        combo1=customtkinter.CTkOptionMenu(self,values=["Nivel de acesso","Usuario","Adminitrador"],corner_radius=0)
+        combo1.place(x=693,y=160)
 
         add=customtkinter.CTkButton(self,text="Add",corner_radius=20,width=60)
-        add.place(x=830,y=160)
+        add.place(x=850,y=160)
     def scroll(self):
         self.campo=customtkinter.CTkScrollableFrame(self,width=1138,height=504)
         self.campo.place(x=0,y=200)
         num=customtkinter.StringVar(value="1")
         numero=customtkinter.CTkEntry(self.campo,width=50,textvariable=num,corner_radius=0)
-        numero.grid(row=0,column=0)
-
+        numero.grid(row=1,column=0)
+        self.texto_coluna()
 
         n1=customtkinter.StringVar(value="anthony ferreira de lima")
         entra=customtkinter.CTkEntry(self.campo,font=("arial",14),width=230,placeholder_text="nome",textvariable=n1,corner_radius=0)
-        entra.grid(row=0,column=1)
+        entra.grid(row=1,column=1)
         n2=customtkinter.StringVar(value="athony.g2455@gmail.com")
         entra=customtkinter.CTkEntry(self.campo,font=("arial",14),width=270,textvariable=n2,corner_radius=0)
-        entra.grid(row=0,column=2)
-        combo=customtkinter.CTkOptionMenu(self.campo,values=["Funçao","estagiario","funcionario","Rh"],corner_radius=0,fg_color="#242424")
-        combo.grid(row=0,column=3)
+        entra.grid(row=1,column=2)
+
+        
+        
+        combo=customtkinter.CTkOptionMenu(self.campo,values=["Cargo","estagiario","funcionario","Rh"],corner_radius=0,fg_color="#242424")
+        combo.grid(row=1,column=3)
+
+        
+       
 
         combo1=customtkinter.CTkOptionMenu(self.campo,values=["Nivel de acesso","Usuario","Adminitrador"],corner_radius=0,fg_color="#242424")
-        combo1.grid(row=0,column=4)
+        combo1.grid(row=1,column=4)
 
 
         num=customtkinter.StringVar(value="2")
         numero=customtkinter.CTkEntry(self.campo,width=50,textvariable=num,corner_radius=0)
-        numero.grid(row=1,column=0)
+        numero.grid(row=2,column=0)
 
         n1=customtkinter.StringVar(value="Daniel da silva")
         entra=customtkinter.CTkEntry(self.campo,font=("arial",14),width=230,placeholder_text="nome",textvariable=n1,corner_radius=0)
-        entra.grid(row=1,column=1)
+        entra.grid(row=2,column=1)
         n2=customtkinter.StringVar(value="foconoaltar@gmail.com")
         entra=customtkinter.CTkEntry(self.campo,font=("arial",14),width=270,textvariable=n2,corner_radius=0)
-        entra.grid(row=1,column=2)
-        combo=customtkinter.CTkOptionMenu(self.campo,values=["Funçao","estagiario","funcionario","Rh"],corner_radius=0,fg_color="#242424")
-        combo.grid(row=1,column=3)
+        entra.grid(row=2,column=2)
+        combo=customtkinter.CTkOptionMenu(self.campo,values=["Cargo","estagiario","funcionario","Rh"],corner_radius=0,fg_color="#242424")
+        combo.grid(row=2,column=3)
 
         combo1=customtkinter.CTkOptionMenu(self.campo,values=["Nivel de acesso","Usuario","Adminitrador"],corner_radius=0,fg_color="#242424")
-        combo1.grid(row=1,column=4)
+        combo1.grid(row=2,column=4)
 class Client(customtkinter.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
@@ -233,8 +251,23 @@ class Support(customtkinter.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
         # add widgets onto the frame, for example:
-        self.label = customtkinter.CTkLabel(self,text="Suport")
+        img_git=customtkinter.CTkImage(Image.open("recursos/imagens_main/git.png"),size=(120,120))
+        label_git=customtkinter.CTkLabel(self,image=img_git,text="")
+        label_git.place(x=500,y=200)
+        git_menor=customtkinter.CTkImage(Image.open("recursos/imagens_main/git.png"),size=(120,120))
+        agradecimentos="""   Bem vindo ao meu projeto 
+        fico muito feliz que esteja olhando esse projeto
+        se estiver interessado nesse projeto ou em outros basta
+        acessar meu github"""
+        label_agra=customtkinter.CTkLabel(self,text=agradecimentos,font=("ariel",18),text_color="black")
+        label_agra.place(x=300,y=350)
 
+        imagem=customtkinter.CTkImage(Image.open("recursos/imagens_main/git.png"),size=(50,50))
+        botao=customtkinter.CTkButton(self,text="clique em mim",image=imagem,width=0,height=0,command=self.abrir_github)
+        botao.place(x=0,y=660)
+    def abrir_github(self):
+        url="https://github.com/Daniel-X2"
+        webbrowser.open(url)
 class Report (customtkinter.CTkFrame):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
