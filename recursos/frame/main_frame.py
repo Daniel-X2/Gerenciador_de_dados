@@ -4,7 +4,7 @@ import customtkinter
 import webbrowser 
 
 
-class DashBoard(customtkinter.CTkFrame):
+class DashBoard(customtkinter.CTkFrame):#aqui tem algo
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
 
@@ -104,7 +104,7 @@ class DashBoard(customtkinter.CTkFrame):
         texto_new=customtkinter.CTkLabel(self,text_color="black",text="Reclamaçoes",fg_color="#FF6F61",corner_radius=0,width=120,bg_color="#89CFF0")
         texto_new.place(x=980,y=180)
 
-class Users(customtkinter.CTkFrame):
+class Users(customtkinter.CTkFrame):#aqui tem algo
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
         self.entrada()
@@ -115,6 +115,12 @@ class Users(customtkinter.CTkFrame):
         adi.place(x=50,y=120)
         
         self.scroll()
+
+
+        n1=customtkinter.CTkImage(Image.open("excluir.png"),size=(20,20))
+        n2=customtkinter.CTkButton(self.campo,text="",image=n1,width=0,height=0,fg_color="#242424")
+        n2.grid(row=1,column=5)
+        
     def texto_coluna(self):
         texto_id=customtkinter.CTkLabel(self.campo,width=50,text="id",corner_radius=0,bg_color="#565b5e")
         texto_id.grid(row=0,column=0)
@@ -183,7 +189,7 @@ class Users(customtkinter.CTkFrame):
 
         combo1=customtkinter.CTkOptionMenu(self.campo,values=["Nivel de acesso","Usuario","Adminitrador"],corner_radius=0,fg_color="#242424")
         combo1.grid(row=2,column=4)
-class Client(customtkinter.CTkFrame):
+class Client(customtkinter.CTkFrame):#aqui tem algo
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
         self.entrada()
@@ -247,7 +253,7 @@ class Settings(customtkinter.CTkFrame):
         # add widgets onto the frame, for example:
         self.label = customtkinter.CTkLabel(self,text="setting")
 
-class Support(customtkinter.CTkFrame):
+class Support(customtkinter.CTkFrame):#aqui tem algo
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
         # add widgets onto the frame, for example:
