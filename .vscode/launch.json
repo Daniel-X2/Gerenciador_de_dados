@@ -9,7 +9,7 @@
             "name": "Depurador do Python: Arquivo Atual",
             "type": "debugpy",
             "request": "launch",
-            "program": "/home/daniel/Área de trabalho/CRUD/main.py",
+            "program": "main.py",
             "console": "integratedTerminal"
         }
     ]

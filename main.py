@@ -11,10 +11,9 @@ from recursos.frame.main_frame import (
     DashBoard,
     Users,
     Client,
-    Analytic,
     Settings,
     Support,
-    Report,
+
 )
 
 # exportar o resto aqui
@@ -32,7 +31,7 @@ class App(customtkinter.CTk):
         self.frame_atual = ""
         self.frames()
         self.botoes_laterais()
-        self.logica_frame(self.frame_Users)
+        self.logica_frame(self.frame_Settings)
 
     def frames(self):
         # n1=customtkinter.CTkFrame()
@@ -46,18 +45,14 @@ class App(customtkinter.CTk):
         self.frame_Client = Client(
             master=self, width=1200, height=900, fg_color="#89CFF0"
         )
-        self.frame_Analytic = Analytic(
-            master=self, width=1200, height=900, fg_color="#89CFF0"
-        )
+        
         self.frame_Settings = Settings(
             master=self, width=1200, height=900, fg_color="#89CFF0"
         )
         self.frame_Support = Support(
             master=self, width=1200, height=900, fg_color="#89CFF0"
         )
-        self.frame_Report = Report(
-            master=self, width=1200, height=900, fg_color="#89CFF0"
-        )
+        
 
     def logica_frame(self, frame):
         if frame.place_info():
@@ -86,7 +81,7 @@ class App(customtkinter.CTk):
             text="  DashBoard        ",
             fg_color="#101a55",
             bg_color="#101a55",
-            hover_color="#101a95",
+            hover_color="#101a55",
             font=("", 20),
             image=img_dashboard,
             corner_radius=5,
@@ -127,23 +122,11 @@ class App(customtkinter.CTk):
             command=lambda: self.logica_frame(frame=self.frame_Client),
         )
         botao_cliente.place(x=0, y=345)
-
+        
         # analises
-        img_analise = customtkinter.CTkImage(
-            Image.open("recursos/imagens_main/analise.png"), size=(25, 25)
-        )
-        botao_analises = customtkinter.CTkButton(
-            self,
-            text="  Analytic              ",
-            image=img_analise,
-            fg_color="#101a55",
-            bg_color="#101a55",
-            hover_color="#101a95",
-            font=("", 20),
-            corner_radius=5,
-            command=lambda: self.logica_frame(frame=self.frame_Analytic),
-        )
-        botao_analises.place(x=0, y=385)
+        
+        
+       
         # configuraçao
         img_config = customtkinter.CTkImage(
             Image.open("recursos/imagens_main/config.png"), size=(25, 25)
@@ -176,21 +159,9 @@ class App(customtkinter.CTk):
             command=lambda: self.logica_frame(frame=self.frame_Support),
         )
         botao_suporte.place(x=0, y=465)
-        img_report = customtkinter.CTkImage(
-            Image.open("recursos/imagens_main/report.png"), size=(25, 25)
-        )
-        botao_report = customtkinter.CTkButton(
-            self,
-            text="  Report           ",
-            image=img_report,
-            fg_color="#101a55",
-            bg_color="#101a55",
-            hover_color="#101a95",
-            font=("", 20),
-            corner_radius=5,
-            command=lambda: self.logica_frame(frame=self.frame_Report),
-        )
-        botao_report.place(x=0, y=510)
+        
+        
+        
         # foto de perfil usuario
         img_perfil = customtkinter.CTkImage(
             Image.open("recursos/imagens_main/usuario-de-perfil.png")
