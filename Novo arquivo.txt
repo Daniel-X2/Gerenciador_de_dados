@@ -1,0 +1,96 @@
+🦅 Overview
+
+Propósito: Tela inicial do sistema. Um painel geral que mostra um resumo rápido de tudo. Inspiração de conteúdo:
+
+    Saudações ao usuário
+
+    Status do sistema
+
+    Atalhos para tarefas comuns
+
+    Gráficos/resumo dos dados mais importantes
+
+📊 DashBoard
+
+Propósito: Painel com métricas, gráficos e dados em tempo real. Inspiração de conteúdo:
+
+    Gráficos de desempenho
+
+    Tabelas de atividades recentes
+
+    Indicadores-chave (KPIs)
+
+    Filtros por datas/usuários
+
+👥 Users
+
+Propósito: Gerenciamento de usuários do sistema. Inspiração de conteúdo:
+
+    Lista de usuários
+
+    Botão de adicionar novo usuário
+
+    Editar/excluir usuários
+
+    Controle de permissões e cargos
+
+🧑‍💼 Client
+
+Propósito: Controle de clientes ou usuários externos. Inspiração de conteúdo:
+
+    Cadastro de novos clientes
+
+    Detalhes de contato e histórico
+
+    Status de contrato ou projetos ativos
+
+    Filtro por região/setor
+
+📈 Analytic
+
+Propósito: Tela para relatórios e análises mais profundas. Inspiração de conteúdo:
+
+    Relatórios exportáveis (PDF, Excel)
+
+    Comparações entre períodos
+
+    Tendências
+
+    Ferramentas de análise de dados (ex: filtros avançados)
+
+⚙️ Settings
+
+Propósito: Configurações do sistema e preferências do usuário. Inspiração de conteúdo:
+
+    Tema claro/escuro
+
+    Idioma
+
+    E-mail de notificação
+
+    Configurações de conta
+
+🛟 Support
+
+Propósito: Suporte técnico ou ajuda ao usuário. Inspiração de conteúdo:
+
+    FAQ
+
+    Formulário de contato
+
+    Chat com suporte (ou link pra WhatsApp)
+
+    Tutoriais e vídeos explicativos
+
+📄 Report
+
+Propósito: Geração e visualização de relatórios específicos. Inspiração de conteúdo:
+
+    Filtros para gerar relatórios
+
+    Lista de relatórios salvos
+
+    Opção para exportar/compartilhar
+
+    Histórico de geração
+
