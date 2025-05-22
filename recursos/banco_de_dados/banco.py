@@ -1,14 +1,7 @@
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import declarative_base, sessionmaker
-from recursos.banco_de_dados.criptografia.cripto import criptografar_dados,descriptografar_dados
-
-
-
-
-#esta faltando incluir a libs logging pra ter um tratamento de erro melhor
-#fazer as docstrings daas funçoes 
-#fazer a validaçao do cpf 
-
+from criptografia.cripto import descriptografar_dados,criptografar_dados
+import json
 
 
 Base=declarative_base()
@@ -109,16 +102,16 @@ class Clientes():
         try:
             try:
                 dados_criptografado=criptografar_dados(dados,chave_criptografar)
-                
             except:
                 print("erro")
-            novo_cliente=Clientes_base(dados_criptografado)
-            self.session.add()
+            dados_json = json.dumps(dados_criptografado)  # Serializa a lista para string
+            novo_cliente = Clientes_base(dados_clientes=dados_json)
+            self.session.add(novo_cliente)
             self.session.commit()
         except Exception as e:
             self.session.rollback()
             print(f"erro ao adicionar clientes: {str(e)} ")  
-    def lista_clientes(self):
+    def lista_clientes(self,numero,senha):
         """
         lista todos os clientes.
     
@@ -127,11 +120,19 @@ class Clientes():
         except: mostar o erro
         """
         try:
-            
-            self.clientes=self.session.query(Clientes_base).all()
-            
-            
-            
+
+            cliente = self.session.query(Clientes_base).all()
+
+            if cliente:
+                n1=cliente[numero].dados_clientes
+                dados = json.loads(n1) 
+                dados_descriptografados=descriptografar_dados(dados,senha)
+                # Desserializa para lista
+                return dados_descriptografados
+        except IndexError:
+            return False
         except Exception as e:
-            print(f"erro ao listar clientes: {str(e)}")
-            
+            print(f"erro ao listar clientes: {str(e)}") 
+
+n1=Clientes()
+print(n1.lista_clientes(8,"admin"))

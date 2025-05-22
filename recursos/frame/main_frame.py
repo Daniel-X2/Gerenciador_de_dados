@@ -2,7 +2,8 @@ from PIL import Image
 
 import customtkinter
 import webbrowser
-from recursos.banco_de_dados.banco import Clientes_base,Conexao
+from recursos.banco_de_dados.banco import Clientes
+from recursos.banco_de_dados.criptografia.cripto import criptografar_dados,descriptografar_dados
 
 class DashBoard(customtkinter.CTkFrame):#aqui tem algo
     def __init__(self, master, **kwargs):
@@ -175,23 +176,33 @@ class Users(customtkinter.CTkFrame):#aqui tem algo
 class Client(customtkinter.CTkFrame):#aqui tem algo
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
+        self.scroll()
         self.entrada()
         self.texto_coluna()
         self.entrada()
-        self.scroll()
-        self.linha=1
-    def criar_cliente(self):
-        self.lista[1].dados_clientes
-        self.cliente()
+        self.linha=0
+        self.continuar=True
+        self.criar_cliente()
+        
 
-        if self.linha==len(self.lista[1]):
-            return
-        else:
+    def criar_cliente(self):
+        n1=Clientes()
+        try:
+            n2=n1.lista_clientes(self.linha)
+            if n2==False:
+                self.continuar=False
+                return False
+        except:
+            self.continuar=False
+            
+        #descriptografar_dados(self.lista[1].dados_clientes[self.linha],senha)
+        self.cliente(self.linha+1,n2,"qual",self.linha+1,"ss","ss")
+        
+        if self.continuar==True:
             self.linha+=1
-            self.after(1,self.criar_cliente())
-    def banco_de_dados(self):
-        self.session=Conexao().sessao(caminho="recursos/banco_de_dados/banco.db")
-        self.lista=self.session.query(Clientes_base).all()
+            self.after(100,self.criar_cliente)
+    
+        
         #falta tirar a criptografia
     def texto(self):
         client_text=customtkinter.CTkLabel(self,text="Clientes",text_color="black",font=("arial",25,"bold"))
@@ -225,16 +236,16 @@ class Client(customtkinter.CTkFrame):#aqui tem algo
         self.label = customtkinter.CTkLabel(self,text="client")
         self.campo=customtkinter.CTkScrollableFrame(self,width=1138,height=504)
         self.campo.place(x=0,y=200)
-        num=customtkinter.StringVar(value="1")
-        numero=customtkinter.CTkEntry(self.campo,width=50,textvariable=num,corner_radius=0)
-        numero.grid(row=1,column=0)
 
         numero=customtkinter.CTkLabel(self.campo,width=140,text="Nivel de acesso",corner_radius=0,bg_color="#565b5e")
         numero.grid(row=0,column=4)
         numero=customtkinter.CTkLabel(self.campo,width=140,text="Cargo",corner_radius=0,bg_color="#565b5e")
 
         numero.grid(row=0,column=3)
-    def cliente(self,nome,email,linha,cargo,estado):
+    def cliente(self,idd,nome,email,linha,cargo,estado):
+        id_var=customtkinter.StringVar(value=idd)
+        id=customtkinter.CTkEntry(self.campo,width=50,textvariable=id_var,corner_radius=0)
+        id.grid(row=linha,column=0)
         n1=customtkinter.StringVar(value=nome)
         entra=customtkinter.CTkEntry(self.campo,font=("arial",14),width=230,placeholder_text="nome",textvariable=n1,corner_radius=0)
         entra.grid(row=linha,column=1)
