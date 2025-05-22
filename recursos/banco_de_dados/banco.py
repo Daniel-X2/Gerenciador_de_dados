@@ -17,17 +17,17 @@ class Funcionarios_base(Base):
     """serve pra fazer as tabelas no arquivo sql"""
     __tablename__ = "funcionarios"
     id = Column(Integer, primary_key=True)
-    usuario = Column(String(50))
-    senha = Column(String(100))
+    nome=Column(String)
+    email=Column(String)
+    cargo=Column(String)
+    nivel=Column(String)
 
 # Definir a tabela clientes
 class Clientes_base(Base):
     """serve pra fazer as tabelas no arquivo sql"""
     __tablename__ = "clientes"
     id = Column(Integer, primary_key=True)
-    nome = Column(String(50))
-    cpf = Column(String)
-    valor_mensal=Column(String)
+    dados_clientes=Column(String)
 # Classe de conexão com o banco de dados
 class Conexao():
     def __init__(self):
@@ -95,7 +95,9 @@ class Funcionario():
         except Exception as e:
             print(f"erro ao tentar listar funcionarios: {str(e)} ")  
 class Clientes():
-    def novos_clientes(self,clientes,cpf,chave_criptografar):
+    def __init__(self):
+        self.session=Conexao().sessao(caminho="recursos/banco_de_dados/banco.db")
+    def novos_clientes(self,dados,chave_criptografar):
         """
         Adiciona um novo cliente ao banco de dados.
     
@@ -106,17 +108,17 @@ class Clientes():
         """
         try:
             try:
-                clientes_criptografado=criptografar_dados(clientes,cpf,chave_criptografar)
-                cpf_criptografado=criptografar_dados(clientes,cpf,chave_criptografar)
+                dados_criptografado=criptografar_dados(dados,chave_criptografar)
+                
             except:
                 print("erro")
-            novo_cliente=Clientes_base(clientes_criptografado,cpf=cpf_criptografado)
-            self.session.add(novo_cliente)
+            novo_cliente=Clientes_base(dados_criptografado)
+            self.session.add()
             self.session.commit()
         except Exception as e:
             self.session.rollback()
             print(f"erro ao adicionar clientes: {str(e)} ")  
-    def lista_clientes(self,senha):
+    def lista_clientes(self):
         """
         lista todos os clientes.
     
@@ -125,10 +127,10 @@ class Clientes():
         except: mostar o erro
         """
         try:
-            clientes=self.session.query(Clientes_base).all()
             
-            for cliente in clientes:
-                print(f"ID: {cliente.id}, nome: {cliente.nome}, cpf: {cliente.cpf}")
+            self.clientes=self.session.query(Clientes_base).all()
+            
+            
             
         except Exception as e:
             print(f"erro ao listar clientes: {str(e)}")

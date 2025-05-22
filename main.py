@@ -1,20 +1,14 @@
-import customtkinter
 import os
-from PIL import Image
-from recursos.banco_de_dados.criptografia.cripto import (
-    descriptografar_dados,
-    criptografar_dados,
-)
-from recursos.login.login import Tela_login
-from recursos.banco_de_dados.banco import Funcionario, Clientes
-from recursos.frame.main_frame import (
-    DashBoard,
-    Users,
-    Client,
-    Settings,
-    Support,
 
-)
+import customtkinter
+from PIL import Image
+
+from recursos.banco_de_dados.banco import Clientes, Funcionario
+from recursos.banco_de_dados.criptografia.cripto import (criptografar_dados,
+                                                         descriptografar_dados)
+from recursos.frame.main_frame import (Client, DashBoard, Settings, Support,
+                                       Users)
+from recursos.login.login import Tela_login
 
 # exportar o resto aqui
 
@@ -45,14 +39,13 @@ class App(customtkinter.CTk):
         self.frame_Client = Client(
             master=self, width=1200, height=900, fg_color="#89CFF0"
         )
-        
+
         self.frame_Settings = Settings(
             master=self, width=1200, height=900, fg_color="#89CFF0"
         )
         self.frame_Support = Support(
             master=self, width=1200, height=900, fg_color="#89CFF0"
         )
-        
 
     def logica_frame(self, frame):
         if frame.place_info():
@@ -70,7 +63,7 @@ class App(customtkinter.CTk):
             else:
                 frame.place(x=205, y=0)
                 self.frame_atual = frame
-
+    
     def botoes_laterais(self):
         # botao dashboard
         img_dashboard = customtkinter.CTkImage(
@@ -86,7 +79,7 @@ class App(customtkinter.CTk):
             image=img_dashboard,
             corner_radius=5,
             command=lambda: self.logica_frame(frame=self.frame_Dash),
-        )
+       )  
         botao_dashboard.place(x=0, y=260)
         # botao Users
         img_usuario = customtkinter.CTkImage(
@@ -122,11 +115,9 @@ class App(customtkinter.CTk):
             command=lambda: self.logica_frame(frame=self.frame_Client),
         )
         botao_cliente.place(x=0, y=345)
-        
+
         # analises
-        
-        
-       
+
         # configuraçao
         img_config = customtkinter.CTkImage(
             Image.open("recursos/imagens_main/config.png"), size=(25, 25)
@@ -159,9 +150,7 @@ class App(customtkinter.CTk):
             command=lambda: self.logica_frame(frame=self.frame_Support),
         )
         botao_suporte.place(x=0, y=465)
-        
-        
-        
+
         # foto de perfil usuario
         img_perfil = customtkinter.CTkImage(
             Image.open("recursos/imagens_main/usuario-de-perfil.png")
