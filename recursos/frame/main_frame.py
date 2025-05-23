@@ -1,8 +1,8 @@
 from PIL import Image
-
+from recursos.login.login import Tela_login
 import customtkinter
 import webbrowser
-from recursos.banco_de_dados.banco import Clientes
+from recursos.banco_de_dados.banco import Clientes,Funcionario
 from recursos.banco_de_dados.criptografia.cripto import criptografar_dados,descriptografar_dados
 
 class DashBoard(customtkinter.CTkFrame):#aqui tem algo
@@ -108,20 +108,69 @@ class DashBoard(customtkinter.CTkFrame):#aqui tem algo
 class Users(customtkinter.CTkFrame):#aqui tem algo
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
-        self.entrada()
+        self.scroll()
+        self.funcoes_entrada()
         usu_text=customtkinter.CTkLabel(self,text="Usuarios",text_color="black",font=("arial",25,"bold"))
         usu_text.place(x=500,y=50)
 
         adi=customtkinter.CTkLabel(self,text="Adicionar Usuario",text_color="black",font=("arial",19,"italic"))
         adi.place(x=50,y=120)
+        
+        self.texto_coluna()
+        
 
-        self.scroll()
+        self.texto()
+        
+    def criar_users(self):
+        n1=Funcionario()
+        try:
+            n2=n1.lista_funcionario(self.linha,"admin")
+            if n2==False:
+                self.continuar=False
+                return False
+        except:
+            self.continuar=False
+            
+        #descriptografar_dados(self.lista[1].dados_clientes[self.linha],senha)
+        self.user(self.linha+1,n2,"ss",self.linha+1,"sss","www")
+        
+        if self.continuar==True:
+            self.linha+=1
+            self.after(100,self.adicionar_usu)
+    def funcoes_entrada(self):
+        self.var_nome=self.criar_var("Nome")
+        self.criar_entrada(var=self.var_nome,x=55,y=160)
+        self.var_email=self.criar_var("Email")
+        self.criar_entrada(var=self.var_email,x=285,y=160,wi=270)
+        self.var_cargo=self.criar_var("Cargo")
+        self.criar_entrada(var=self.var_cargo,x=555,y=160,verificar=1)
+        self.var_nivel=self.criar_var("Nivel acesso")
+        self.criar_entrada(var=self.var_nivel,x=693,y=160,verificar=1,text=["nivel de acesso","usuario","administrador"])
+        add=customtkinter.CTkButton(self,text="Add",corner_radius=20,width=60,command=self.adicionar_usu)
+        add.place(x=850,y=160)
+        
+        #55,285,555,693,850
+    def criar_var(self,string):
+        variavel=customtkinter.StringVar(value=string)
+        return variavel
+    def criar_entrada(self,var,x,y,verificar=0,text=["Cargo","estagiario","funcionario","Rh"],wi=230):
+        if verificar==0:
+            entrada=customtkinter.CTkEntry(self,textvariable=var,corner_radius=0,font=("arial",15),width=wi,text_color="gray")
+            entrada.place(x=x,y=y)
+        else:
+            cargo=customtkinter.CTkOptionMenu(self,variable=var,values=text,corner_radius=0)
+            cargo.place(x=x,y=y)
 
+    def texto(self):
+        client_text=customtkinter.CTkLabel(self,text="Usuarios",text_color="black",font=("arial",25,"bold"))
+        client_text.place(x=500,y=50)
 
-        n1=customtkinter.CTkImage(Image.open("excluir.png"),size=(20,20))
-        n2=customtkinter.CTkButton(self.campo,text="",image=n1,width=0,height=0,fg_color="#242424")
-        n2.grid(row=1,column=5)
-
+        texto_adicionar=customtkinter.CTkLabel(self,text="Adicionar Usuarios",text_color="black",font=("arial",19,"italic"))
+        texto_adicionar.place(x=50,y=120)
+    def adicionar_usu(self):#tenho que criar um botao pra refazer a lista
+        adi=Funcionario()
+        var_lista=[str(self.var_nome),str(self.var_email),str(self.var_cargo),str(self.var_nivel)]
+        adi.novo_funcionarios(var_lista,"admin")
     def texto_coluna(self):
         texto_id=customtkinter.CTkLabel(self.campo,width=50,text="id",corner_radius=0,bg_color="#565b5e")
         texto_id.grid(row=0,column=0)
@@ -134,61 +183,58 @@ class Users(customtkinter.CTkFrame):#aqui tem algo
         numero=customtkinter.CTkLabel(self.campo,width=140,text="Cargo",corner_radius=0,bg_color="#565b5e")
 
         numero.grid(row=0,column=3)
-    def entrada(self):
-        entrada_nome=customtkinter.CTkEntry(self,corner_radius=0,font=("arial",15),width=230,text_color="white",placeholder_text="nome",placeholder_text_color="gray")
-        entrada_nome.place(x=55,y=160)
-        entrada_email=customtkinter.CTkEntry(self,corner_radius=0,font=("arial",15),width=270,text_color="white",placeholder_text="Email",placeholder_text_color="gray")
-        entrada_email.place(x=285,y=160)
-
-        combo=customtkinter.CTkOptionMenu(self,values=["Cargo","estagiario","funcionario","Rh"],corner_radius=0)
-        combo.place(x=555,y=160)
-
-        combo1=customtkinter.CTkOptionMenu(self,values=["Nivel de acesso","Usuario","Adminitrador"],corner_radius=0)
-        combo1.place(x=693,y=160)
-
-        add=customtkinter.CTkButton(self,text="Add",corner_radius=20,width=60)
-        add.place(x=850,y=160)
+    
     def scroll(self):
         self.campo=customtkinter.CTkScrollableFrame(self,width=1138,height=504)
         self.campo.place(x=0,y=200)
-        num=customtkinter.StringVar(value="1")
-        numero=customtkinter.CTkEntry(self.campo,width=50,textvariable=num,corner_radius=0)
-        numero.grid(row=1,column=0)
-        self.texto_coluna()
+    
+        
+        numero=customtkinter.CTkLabel(self.campo,width=140,text="Nivel de acesso",corner_radius=0,bg_color="#565b5e")
+        numero.grid(row=0,column=4)
+        numero=customtkinter.CTkLabel(self.campo,width=140,text="Cargo",corner_radius=0,bg_color="#565b5e")
 
-        n1=customtkinter.StringVar(value="anthony ferreira de lima")
+        numero.grid(row=0,column=3)
+    def user(self,idd,nome,email,linha,cargo,estado):
+        id_var=customtkinter.StringVar(value=idd)
+        id=customtkinter.CTkEntry(self.campo,width=50,textvariable=id_var,corner_radius=0)
+        id.grid(row=linha,column=0)
+        n1=customtkinter.StringVar(value=nome)
         entra=customtkinter.CTkEntry(self.campo,font=("arial",14),width=230,placeholder_text="nome",textvariable=n1,corner_radius=0)
-        entra.grid(row=1,column=1)
-        n2=customtkinter.StringVar(value="athony.g2455@gmail.com")
+        entra.grid(row=linha,column=1)
+        n2=customtkinter.StringVar(value=email)
         entra=customtkinter.CTkEntry(self.campo,font=("arial",14),width=270,textvariable=n2,corner_radius=0)
-        entra.grid(row=1,column=2)
+        entra.grid(row=linha,column=2)
 
+        combo_var=customtkinter.StringVar(value=cargo)
+        combo=customtkinter.CTkOptionMenu(self.campo,variable=combo_var,values=["cargo","estagiario","funcionario","rh","outro"],corner_radius=0,fg_color="#242424")
+        combo.grid(row=linha,column=3)
 
+        combo_var2=customtkinter.StringVar(value=estado)
+        combo1=customtkinter.CTkOptionMenu(self.campo,variable=combo_var2,values=["inativo","ativo"],corner_radius=0,fg_color="#242424")
+        combo1.grid(row=linha,column=4)
 
-        combo=customtkinter.CTkOptionMenu(self.campo,values=["Cargo","estagiario","funcionario","Rh"],corner_radius=0,fg_color="#242424")
-        combo.grid(row=1,column=3)
-
-
-
-        combo1=customtkinter.CTkOptionMenu(self.campo,values=["Nivel de acesso","Usuario","Adminitrador"],corner_radius=0,fg_color="#242424")
-        combo1.grid(row=1,column=4)
-
+        n1=customtkinter.CTkImage(Image.open("excluir.png"),size=(20,20))
+        n2=customtkinter.CTkButton(self.campo,text="",image=n1,width=0,height=0,fg_color="#242424")
+        n2.grid(row=linha,column=5)
 class Client(customtkinter.CTkFrame):#aqui tem algo
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
         self.scroll()
-        self.entrada()
         self.texto_coluna()
-        self.entrada()
+        
         self.linha=0
         self.continuar=True
+        self.funçoes_entrada()
         self.criar_cliente()
         
-
+    def adicionar_clientes(self):#tenho que criar um botao pra refazer a lista
+        adi=Funcionario()
+        var_lista=[str(self.var_nome),str(self.var_email),str(self.var_cargo),str(self.var_ativo)]
+        adi.novo_funcionarios(var_lista,"admin")
     def criar_cliente(self):
         n1=Clientes()
         try:
-            n2=n1.lista_clientes(self.linha)
+            n2=n1.lista_clientes(self.linha,"admin")
             if n2==False:
                 self.continuar=False
                 return False
@@ -196,7 +242,7 @@ class Client(customtkinter.CTkFrame):#aqui tem algo
             self.continuar=False
             
         #descriptografar_dados(self.lista[1].dados_clientes[self.linha],senha)
-        self.cliente(self.linha+1,n2,"qual",self.linha+1,"ss","ss")
+        self.cliente(self.linha+1,n2,"ss",self.linha+1,"sss","www")
         
         if self.continuar==True:
             self.linha+=1
@@ -217,20 +263,28 @@ class Client(customtkinter.CTkFrame):#aqui tem algo
         texto_nome.grid(row=0,column=1)
         texto_email=customtkinter.CTkLabel(self.campo,width=270,text="Email",corner_radius=0,bg_color="#565b5e")
         texto_email.grid(row=0,column=2)
-    def entrada(self):
-        entrada_nome=customtkinter.CTkEntry(self,corner_radius=0,font=("arial",15),width=230,text_color="white",placeholder_text="nome",placeholder_text_color="gray")
-        entrada_nome.place(x=55,y=160)
-        entrada_email=customtkinter.CTkEntry(self,corner_radius=0,font=("arial",15),width=270,text_color="white",placeholder_text="Email",placeholder_text_color="gray")
-        entrada_email.place(x=285,y=160)
-
-        combo=customtkinter.CTkOptionMenu(self,values=["Cargo","estagiario","funcionario","Rh"],corner_radius=0)
-        combo.place(x=555,y=160)
-
-        combo1=customtkinter.CTkOptionMenu(self,values=["ativo","inativo"],corner_radius=0)
-        combo1.place(x=693,y=160)
-
-        add=customtkinter.CTkButton(self,text="Add",corner_radius=20,width=60)
+    def funçoes_entrada(self):
+        self.var_nome=self.criar_var("Nome")
+        self.criar_entrada(var=self.var_nome,x=55,y=160)
+        self.var_email=self.criar_var("Email")
+        self.criar_entrada(var=self.var_email,x=285,y=160,widt=270)
+        self.var_cargo=self.criar_var("Cargo")
+        self.criar_entrada(var=self.var_cargo,x=555,y=160,verificar=1)
+        self.var_ativo=self.criar_var("ativo")
+        self.criar_entrada(var=self.var_ativo,x=693,y=160,verificar=1,text=["ativo,inativo"])
+        add=customtkinter.CTkButton(self,text="Add",corner_radius=20,width=60,command=self.criar_cliente)
         add.place(x=850,y=160)
+    def criar_var(self,string):
+        variavel=customtkinter.StringVar(value=string)
+        return variavel
+    def criar_entrada(self,var,x,y,verificar=0,text=["Cargo","estagiario","funcionario","Rh"],widt=230):
+        if verificar==0:
+            entrada=customtkinter.CTkEntry(self,width=widt,textvariable=var,corner_radius=0,font=("arial",15),text_color="gray")
+            entrada.place(x=x,y=y)
+        else:
+            cargo=customtkinter.CTkOptionMenu(self,variable=var,values=text,corner_radius=0)
+            cargo.place(x=x,y=y)
+        
 
     def scroll(self):
         self.label = customtkinter.CTkLabel(self,text="client")
