@@ -73,8 +73,11 @@ class Funcionario():
                 return False
             if funcionario:
                 n1 = funcionario[numero].dados_funcionario
+                
                 dados_descriptografados = descriptografar_dados(n1, senha)
+                print(dados_descriptografados)
                 dados = json.loads(dados_descriptografados)
+                
                 return dados
         except IndexError:
             return False

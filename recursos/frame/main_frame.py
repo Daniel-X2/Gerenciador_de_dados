@@ -52,26 +52,26 @@ class DashBoard(customtkinter.CTkFrame):#aqui tem algo
     def report(self):
         titulo=customtkinter.CTkLabel(self.frame_report,text="Report",font=("arial",17,"italic"))
         titulo.place(x=0,y=0)
-        texto_report=customtkinter.CTkLabel(self.frame_report,text="aqui aconteceu nada mane")
+        texto_report=customtkinter.CTkLabel(self.frame_report,text="problemas no Support")
         texto_report.place(x=0,y=40)
     def atividade_recente (self):
         titulo=customtkinter.CTkLabel(self.frame_atividade,text="Atividade Recente",font=("arial",17,"italic"))
         titulo.place(x=0,y=0)
-        texto_atividade=customtkinter.CTkLabel(self.frame_atividade,text="aqui aconteceu nada mane")
+        texto_atividade=customtkinter.CTkLabel(self.frame_atividade,text="adicionou 1 novo cliente")
         texto_atividade.place(x=0,y=40)
     def status_sistema(self):
         titulo=customtkinter.CTkLabel(self.frame_status,text="Status do Sistema",font=("arial",17,"italic"))
         titulo.place(x=0,y=0)
-        status_sys=customtkinter.CTkLabel(self.frame_status,text="nada aconteceu nessa bixiga",font=("arial",15,"italic"))
-        status_sys.place(x=0,y=50)
+        status_sys=customtkinter.CTkLabel(self.frame_status,text="Sistema esta ok")
+        status_sys.place(x=0,y=40)
     def botoes_acao(self):
-        titulo=customtkinter.CTkLabel(self.frame_acao,text="Açao Rapida",font=("arial",17,"italic"))
-        titulo.place(x=0,y=0)
+        titulo=customtkinter.CTkLabel(self.frame_acao,text="Açao Rapida",font=("arial",17,"italic"),corner_radius=50)
+        titulo.place(x=10,y=0)
         add_usuario=customtkinter.CTkButton(self.frame_acao,text="• Adicionar Usuario",font=("arial",15,"italic"),fg_color="#242424")
-        add_usuario.place(x=20,y=40)
-        reportar=customtkinter.CTkButton(self.frame_acao,text="• Reportar     ",font=("arial",15,"italic"),fg_color="#242424")
-        reportar.place(x=20,y=70)
-        configurar=customtkinter.CTkButton(self.frame_acao,text="• Settings",fg_color="#242424",font=("arial",15,"italic"))
+        add_usuario.place(x=0,y=40)
+        reportar=customtkinter.CTkButton(self.frame_acao,text="• reportar                 ",font=("arial",15,"italic"),fg_color="#242424")
+        reportar.place(x=0,y=70)
+        configurar=customtkinter.CTkButton(self.frame_acao,text="• Settings                 ",fg_color="#242424",font=("arial",15,"italic"))
         configurar.place(x=0,y=100)
     def card_usuario(self):
         #posso pegar uma label fazia e simular uma extensao dessa primeira label pra ficar algo mais boniyo
@@ -104,7 +104,9 @@ class DashBoard(customtkinter.CTkFrame):#aqui tem algo
         texto_usuario.place(x=980,y=150)
         texto_new=customtkinter.CTkLabel(self,text_color="black",text="Reclamaçoes",fg_color="#FF6F61",corner_radius=0,width=120,bg_color="#89CFF0")
         texto_new.place(x=980,y=180)
-
+class delete():
+    def delete_item(self,Banco):
+        print
 class Users(customtkinter.CTkFrame):#aqui tem algo
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
@@ -117,10 +119,11 @@ class Users(customtkinter.CTkFrame):#aqui tem algo
         adi.place(x=50,y=120)
         
         self.texto_coluna()
-        
-
+        self.linha=0
+        self.continuar=True
         self.texto()
-        
+        self.criar_users()
+
     def criar_users(self):
         n1=Funcionario()
         try:
@@ -131,12 +134,12 @@ class Users(customtkinter.CTkFrame):#aqui tem algo
         except:
             self.continuar=False
             
-        #descriptografar_dados(self.lista[1].dados_clientes[self.linha],senha)
-        self.user(self.linha+1,n2,"ss",self.linha+1,"sss","www")
+        #n1=descriptografar_dados(self.lista[1].dados_clientes[self.linha],"admin")
+        self.user(self.linha+1,n2[0],n2[1],self.linha+1,n2[2],n2[3])
         
         if self.continuar==True:
             self.linha+=1
-            self.after(100,self.adicionar_usu)
+            self.after(100,self.criar_users)
     def funcoes_entrada(self):
         self.var_nome=self.criar_var("Nome")
         self.criar_entrada(var=self.var_nome,x=55,y=160)
@@ -169,7 +172,8 @@ class Users(customtkinter.CTkFrame):#aqui tem algo
         texto_adicionar.place(x=50,y=120)
     def adicionar_usu(self):#tenho que criar um botao pra refazer a lista
         adi=Funcionario()
-        var_lista=[str(self.var_nome),str(self.var_email),str(self.var_cargo),str(self.var_nivel)]
+        var_lista=[self.var_nome.get(),self.var_email.get(),self.var_cargo.get(),self.var_nivel.get()]
+        
         adi.novo_funcionarios(var_lista,"admin")
     def texto_coluna(self):
         texto_id=customtkinter.CTkLabel(self.campo,width=50,text="id",corner_radius=0,bg_color="#565b5e")
@@ -221,16 +225,17 @@ class Client(customtkinter.CTkFrame):#aqui tem algo
         super().__init__(master, **kwargs)
         self.scroll()
         self.texto_coluna()
-        
+        adi=customtkinter.CTkLabel(self,text="Adicionar Clientes",text_color="black",font=("arial",19,"italic"))
+        adi.place(x=50,y=120)
         self.linha=0
         self.continuar=True
         self.funçoes_entrada()
         self.criar_cliente()
         
     def adicionar_clientes(self):#tenho que criar um botao pra refazer a lista
-        adi=Funcionario()
-        var_lista=[str(self.var_nome),str(self.var_email),str(self.var_cargo),str(self.var_ativo)]
-        adi.novo_funcionarios(var_lista,"admin")
+        adi=Clientes()
+        var_lista=[self.var_nome.get(),self.var_email.get(),self.var_cargo.get(),self.var_ativo.get()]
+        adi.novos_clientes(var_lista,"admin")
     def criar_cliente(self):
         n1=Clientes()
         try:
@@ -242,7 +247,7 @@ class Client(customtkinter.CTkFrame):#aqui tem algo
             self.continuar=False
             
         #descriptografar_dados(self.lista[1].dados_clientes[self.linha],senha)
-        self.cliente(self.linha+1,n2,"ss",self.linha+1,"sss","www")
+        self.cliente(self.linha+1,n2[0],n2[1],self.linha+1,n2[2],n2[3])
         
         if self.continuar==True:
             self.linha+=1
@@ -271,8 +276,8 @@ class Client(customtkinter.CTkFrame):#aqui tem algo
         self.var_cargo=self.criar_var("Cargo")
         self.criar_entrada(var=self.var_cargo,x=555,y=160,verificar=1)
         self.var_ativo=self.criar_var("ativo")
-        self.criar_entrada(var=self.var_ativo,x=693,y=160,verificar=1,text=["ativo,inativo"])
-        add=customtkinter.CTkButton(self,text="Add",corner_radius=20,width=60,command=self.criar_cliente)
+        self.criar_entrada(var=self.var_ativo,x=693,y=160,verificar=1,text=["ativo","inativo"])
+        add=customtkinter.CTkButton(self,text="Add",corner_radius=20,width=60,command=self.adicionar_clientes)
         add.place(x=850,y=160)
     def criar_var(self,string):
         variavel=customtkinter.StringVar(value=string)
