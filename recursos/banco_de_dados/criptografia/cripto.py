@@ -38,9 +38,9 @@ def criptografar_dados(dados, senha):
     cipher = AES.new(chave, AES.MODE_CBC)
     iv = cipher.iv  # Vetor de inicialização (IV)
     # Adicionar padding aos dados
-    dados_preenchidos = pad(dados.encode(), AES.block_size)
+    dados_com_padding = pad(dados.encode(), AES.block_size)
     # Criptografar os dados
-    dados_criptografados = cipher.encrypt(dados_preenchidos)
+    dados_criptografados = cipher.encrypt(dados_com_padding)
     # Retornar os dados criptografados em base64 (salt + IV + dados criptografados)
     return base64.b64encode(salt + iv + dados_criptografados).decode()
 # Função para descriptografar dados

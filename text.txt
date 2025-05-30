@@ -1,0 +1,89 @@
+def botoes_laterais(self):
+        # botao dashboard
+        img_dashboard = customtkinter.CTkImage(
+            Image.open("recursos/imagens_main/camadas.png"), size=(25, 25)
+        )
+        botao_dashboard = customtkinter.CTkButton(
+            self,
+            text="  DashBoard        ",
+            fg_color="#101a55",
+            bg_color="#101a55",
+            hover_color="#101a55",
+            font=("", 20),
+            image=img_dashboard,
+            corner_radius=5,
+            command=lambda: self.logica_frame(frame=self.frame_Dash),
+       )  
+        botao_dashboard.place(x=0, y=260)
+        # botao Users
+        img_usuario = customtkinter.CTkImage(
+            Image.open("recursos/imagens_main/usuarios.png"), size=(25, 25)
+        )
+        botao_usuario = customtkinter.CTkButton(
+            self,
+            text="  Users                   ",
+            fg_color="#101a55",
+            bg_color="#101a55",
+            hover_color="#101a95",
+            font=("", 20),
+            image=img_usuario,
+            corner_radius=5,
+            command=lambda: self.logica_frame(frame=self.frame_Users),
+        )
+        # foi necessario colocar um lambda para que a funçao podesse colocar um parametro sem causa bug
+        botao_usuario.place(x=0, y=320)
+        # Clientes
+        # img_clientes=customtkinter.CTkImage(Image.open())
+        img_clientes = customtkinter.CTkImage(
+            Image.open("recursos/imagens_main/client.png"), size=(25, 25)
+        )
+        botao_cliente = customtkinter.CTkButton(
+            self,
+            text="  Client                  ",
+            fg_color="#101a55",
+            bg_color="#101a55",
+            hover_color="#101a95",
+            font=("", 20),
+            image=img_clientes,
+            corner_radius=5,
+            command=lambda: self.logica_frame(frame=self.frame_Client),
+        )
+        botao_cliente.place(x=0, y=365)
+
+        # analises
+
+        # configuraçao
+        img_config = customtkinter.CTkImage(
+            Image.open("recursos/imagens_main/config.png"), size=(25, 25)
+        )
+        botao_config = customtkinter.CTkButton(
+            self,
+            text="  Settings             ",
+            image=img_config,
+            fg_color="#101a55",
+            bg_color="#101a55",
+            hover_color="#101a95",
+            font=("", 20),
+            corner_radius=5,
+            command=lambda: self.logica_frame(frame=self.frame_Settings),
+        )
+        botao_config.place(x=0, y=425)
+        # suporte
+        img_suporte = customtkinter.CTkImage(
+            Image.open("recursos/imagens_main/boia.png"), size=(25, 25)
+        )
+        botao_suporte = customtkinter.CTkButton(
+            self,
+            text="  Support              ",
+            image=img_suporte,
+            fg_color="#101a55",
+            bg_color="#101a55",
+            hover_color="#101a95",
+            font=("", 20),
+            corner_radius=5,
+            command=lambda: self.logica_frame(frame=self.frame_Support),
+        )
+        botao_suporte.place(x=0, y=465)
+
+        
+        
