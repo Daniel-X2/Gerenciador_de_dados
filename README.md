@@ -1,13 +1,3 @@
-Vou analisar o repositório e criar um README.md para o projeto Gerenciador_de_dados. Primeiro, precisarei visualizar o repositório para identificar:
-
-1. As tecnologias utilizadas e dependências
-2. A estrutura de pastas
-3. As funcionalidades
-4. Instruções de instalação e uso
-
-### Visualização do repositório
-
-Vou acessar o link que você compartilhou e analisar o conteúdo da seguinte forma:
 
 ```markdown
 # Gerenciador de Dados
